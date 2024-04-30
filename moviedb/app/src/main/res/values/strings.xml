@@ -19,5 +19,6 @@
     <string name="txt_menu_maps">Mapas</string>
     <string name="txt_menu_upload">Cargar</string>
     <string name="txt_menu_profile">Perfil</string>
+    <string name="title_activity_maps">MapsActivity</string>
 
 </resources>

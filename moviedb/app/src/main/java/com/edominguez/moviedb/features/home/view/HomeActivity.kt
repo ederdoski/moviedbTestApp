@@ -20,14 +20,29 @@ class HomeActivity: BaseActivity<HomeViewActivityBinding>() {
         const val MOVIE_FILTER_RECOMMENDED = "popular"
 
         const val BOTTOM_MENU_ITEM_HOME = 1
-        const val BOTTOM_MENU_ITEM_CREDITO = 2
-        const val BOTTOM_MENU_ITEM_PUNTOS = 3
-        const val BOTTOM_MENU_ITEM_PERFIL = 4
+        const val BOTTOM_MENU_ITEM_MAPS = 2
     }
 
     override fun init() {
+        setOnClickListeners()
         Functions.setStatusBarColor(this, R.color.blue_dark)
     }
+
+    private fun setOnClickListeners() {
+        binding.menu.lnItemHome.setOnClickListener {
+        }
+        binding.menu.lnItemMaps.setOnClickListener {
+            goToMaps()
+        }
+        binding.menu.lnItemUpload.setOnClickListener {
+
+        }
+        binding.menu.lnItemProfile.setOnClickListener {
+
+        }
+    }
+
+    //---- Navigation Methods
 
     override fun onFragmentEvent(action: ProtocolAction) {
         when (action) {
@@ -36,44 +51,30 @@ class HomeActivity: BaseActivity<HomeViewActivityBinding>() {
         }
     }
 
-    //---- Logic Methods
-
-    private fun setSelectedMenuItem(item: Int) {
-        disableMenuItem(binding.menu.imgHome, binding.menu.tvItemHome)
-        disableMenuItem(binding.menu.imgMaps, binding.menu.tvItemMaps)
-        disableMenuItem(binding.menu.imgUpload, binding.menu.tvItemUpload)
-        disableMenuItem(binding.menu.imgProfile, binding.menu.tvItemProfile)
-        when (item) {
-            BOTTOM_MENU_ITEM_HOME -> enableMenuItem(
-                binding.menu.imgHome,
-                binding.menu.tvItemHome
-            )
-
-            BOTTOM_MENU_ITEM_CREDITO -> enableMenuItem(
-                binding.menu.imgMaps,
-                binding.menu.tvItemMaps
-            )
-
-            BOTTOM_MENU_ITEM_PUNTOS -> enableMenuItem(
-                binding.menu.imgUpload,
-                binding.menu.tvItemUpload
-            )
-
-            BOTTOM_MENU_ITEM_PERFIL -> enableMenuItem(
-                binding.menu.imgProfile,
-                binding.menu.tvItemProfile
-            )
-        }
+    private fun goToHome() {
+        goTo(navController, R.id.action_home_to_maps)
     }
 
-    //---- UI Methods
+    private fun goToMaps() {
+        goTo(navController, R.id.action_home_to_maps)
+    }
 
-    private fun disableMenuItem(icon: ImageView, text: TextView) {
-        icon.setColorFilter(
-            ContextCompat.getColor(this, R.color.gray),
-            android.graphics.PorterDuff.Mode.SRC_ATOP
-        )
-        text.setTextColor(ContextCompat.getColor(this, R.color.gray))
+    //---- Logic Methods
+
+    private fun disableMenuItems() {
+        val aIcons = arrayListOf(binding.menu.imgHome, binding.menu.imgMaps, binding.menu.imgUpload, binding.menu.imgProfile)
+        val aTextView = arrayListOf(binding.menu.tvItemHome, binding.menu.tvItemMaps, binding.menu.tvItemUpload, binding.menu.tvItemProfile)
+
+        aIcons.forEach {
+            it.setColorFilter(
+                ContextCompat.getColor(this, R.color.gray),
+                android.graphics.PorterDuff.Mode.SRC_ATOP
+            )
+        }
+
+        aTextView.forEach {
+            it.setTextColor(ContextCompat.getColor(this, R.color.gray))
+        }
     }
 
     private fun enableMenuItem(icon: ImageView, text: TextView) {
@@ -83,5 +84,33 @@ class HomeActivity: BaseActivity<HomeViewActivityBinding>() {
         )
         text.setTextColor(ContextCompat.getColor(this, R.color.white))
     }
+    private fun setSelectedMenuItem(item: Int) {
+        disableMenuItems()
+        when (item) {
+            BOTTOM_MENU_ITEM_HOME -> enableMenuItem(
+                binding.menu.imgHome,
+                binding.menu.tvItemHome
+            )
+
+            BOTTOM_MENU_ITEM_MAPS -> enableMenuItem(
+                binding.menu.imgMaps,
+                binding.menu.tvItemMaps
+            )
+
+            /*BOTTOM_MENU_ITEM_PUNTOS -> enableMenuItem(
+                binding.menu.imgUpload,
+                binding.menu.tvItemUpload
+            )
+
+            BOTTOM_MENU_ITEM_PERFIL -> enableMenuItem(
+                binding.menu.imgProfile,
+                binding.menu.tvItemProfile
+            )*/
+        }
+    }
+
+    //---- UI Methods
+
+
 
 }

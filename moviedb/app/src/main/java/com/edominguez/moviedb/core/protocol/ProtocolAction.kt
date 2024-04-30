@@ -13,4 +13,5 @@ sealed class ProtocolAction {
 
     /** HOME PROTOCOLS */
     class OnSelectedHomeItem(val option: Int) : ProtocolAction()
+    class OnSelectedMapsItem(val option: Int) : ProtocolAction()
 }

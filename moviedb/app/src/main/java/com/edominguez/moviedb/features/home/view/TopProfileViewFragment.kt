@@ -29,7 +29,6 @@ class TopProfileViewFragment : BaseFragment<HomeViewFragmentBinding>() {
 
     override fun listenToObserver() {
         observe(homeViewModel.homeVMDelegate.showUnknownError, this::onError)
-        observe(homeViewModel.homeVMDelegate.onListMovieResponse, this::onListMovieResponse)
     }
 
     // ---- Initialize your view here
