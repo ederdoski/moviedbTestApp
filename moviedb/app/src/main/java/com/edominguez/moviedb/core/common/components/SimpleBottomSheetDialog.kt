@@ -36,7 +36,7 @@ class SimpleBottomSheetDialog(
     }
 
     private fun init() {
-        binding.imageMainIcon.setImageResource(icon ?: R.drawable.ic_launcher_foreground)
+        binding.imageMainIcon.setImageResource(icon ?: R.drawable.ic_launcher_background)
         binding.txtTitle.text = title
         binding.txtSubTitle.text = subTitle
         Functions.setHtmlText( binding.txtDescription, description)

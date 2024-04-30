@@ -10,12 +10,14 @@ const val COMMA = ","
 
 // ---- URLS
 
-const val MOVIE_DB_API = "https://app.ontop.ai/"
+const val MOVIE_DB_IMG_API = "https://image.tmdb.org/t/p/w185"
+const val MOVIE_DB_BIG_IMG_API = "https://image.tmdb.org/t/p/w780"
 
 // ---- Utils
 
 const val ZERO = 0
-const val ONE = 1
+const val FIRST_POSITION = 1
+const val GRID_QUANTITY = 3
 const val THOUSAND = 1000
 const val ZERO_FLOAT = 0.0F
 const val ZERO_STRING = "0"
@@ -23,6 +25,7 @@ const val USD = "USD"
 const val TRUE = "TRUE"
 const val NULL = "null"
 const val FALSE = "FALSE"
+const val MAX_TITLE_LENGTH = 15
 const val INVALID_INT: Int = 999999999
 const val SESSION_EXPIRED_TAG = "ErrorSessionExpired"
 

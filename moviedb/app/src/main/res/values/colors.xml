@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <color name="blue_dark">#032541</color>
+
     <color name="primary">#FF5A70</color>
     <color name="light_black">#3B3B3B</color>
 
@@ -12,8 +14,15 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
+
+    <color name="gray">#666666</color>
+    <color name="gray_light">#B6B6B6</color>
+    <color name="gray_light_alpha_3">#4DFFFFFF</color>
+    <color name="gray_light_2">#CFCFCF</color>
+
     <color name="background_bottom_sheet">#666666</color>
 
+    <color name="background_app">#FFFFFF</color>
 
     <color name="text_editext">#1C0B11</color>
     <color name="hint_text_color">#A0A0A0</color>

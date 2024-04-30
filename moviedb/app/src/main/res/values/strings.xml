@@ -1,6 +1,23 @@
 <resources>
 
+
+    <!-- Home -->
+    <string name="txt_filter_popular">Mas Populares</string>
+    <string name="txt_filter_rating">Mejor calificadas</string>
+    <string name="txt_filter_recommendations">Recomendadas</string>
+
+    <string name="txt_movie_detail">Ver Detalle</string>
+    <string name="txt_movie_add">Mi lista</string>
+    <string name="txt_title_movie">%1$s …</string>
+
+
     <string name="app_name">moviedb</string>
     <string name="txt_open">open file</string>
+
+
+    <string name="txt_menu_home">Inicio</string>
+    <string name="txt_menu_maps">Mapas</string>
+    <string name="txt_menu_upload">Cargar</string>
+    <string name="txt_menu_profile">Perfil</string>
 
 </resources>
