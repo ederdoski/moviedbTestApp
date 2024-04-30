@@ -20,13 +20,13 @@ android {
     buildTypes {
         debug {
             buildConfigField("String","AMBIENT", "\"DEBUG\"")
-            buildConfigField("String","BASE_URL", "\"https://api.getontop.com\"")
+            buildConfigField("String","BASE_URL", "\"https://api.themoviedb.org\"")
         }
 
         release {
             isMinifyEnabled = false
             buildConfigField("String","AMBIENT", "\"PROD\"")
-            buildConfigField("String","BASE_URL", "\"https://api.getontop.com\"")
+            buildConfigField("String","BASE_URL", "\"https://api.themoviedb.org\"")
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
