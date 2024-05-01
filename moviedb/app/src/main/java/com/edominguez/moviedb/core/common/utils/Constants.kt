@@ -18,6 +18,7 @@ const val MOVIE_DB_BIG_IMG_API = "https://image.tmdb.org/t/p/w780"
 const val ZERO = 0
 const val FIRST_POSITION = 1
 const val GRID_QUANTITY = 3
+const val QUANTITY_MINUTES_TO_REFRESH_POSITION = 1L
 const val THOUSAND = 1000
 const val ZERO_FLOAT = 0.0F
 const val ZERO_STRING = "0"

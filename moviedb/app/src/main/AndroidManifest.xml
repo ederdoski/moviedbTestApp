@@ -2,6 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- Permissions -->
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:name=".BaseMovieDBApplication"
         android:allowBackup="true"
@@ -26,7 +31,7 @@
         </activity>
 
         <activity
-            android:name=".features.home.view.HomeActivity"
+            android:name=".features.home.movies.view.HomeActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.MovieDB" />
 

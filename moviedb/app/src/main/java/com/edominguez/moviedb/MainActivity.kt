@@ -2,7 +2,7 @@ package com.edominguez.moviedb
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
-import com.edominguez.moviedb.features.home.viewmodel.HomeViewModel
+import com.edominguez.moviedb.features.home.movies.viewmodel.HomeViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : ComponentActivity() {

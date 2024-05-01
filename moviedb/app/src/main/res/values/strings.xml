@@ -14,11 +14,26 @@
     <string name="app_name">moviedb</string>
     <string name="txt_open">open file</string>
 
+    <!-- Maps -->
+    <string name="txt_device_id">Device ID</string>
+    <string name="txt_last_update">Ultima conexion</string>
+
+
+    <!-- Menu Options -->
 
     <string name="txt_menu_home">Inicio</string>
     <string name="txt_menu_maps">Mapas</string>
     <string name="txt_menu_upload">Cargar</string>
     <string name="txt_menu_profile">Perfil</string>
     <string name="title_activity_maps">MapsActivity</string>
+
+    <!-- Dialogs -->
+
+    <string name="txt_location_unknown">No podemos localizarte</string>
+    <string name="txt_dialog_tag">Dialog</string>
+    <string name="txt_error">Ha ocurrido un problema</string>
+    <string name="txt_error_gps_description">El GPS del dispositivo se encuentra apagado</string>
+    <string name="txt_error_user_positions">No podemos accedder a la lista de usuarios</string>
+    <string name="ok_btn">OK</string>
 
 </resources>

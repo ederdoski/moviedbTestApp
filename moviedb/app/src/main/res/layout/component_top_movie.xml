@@ -7,8 +7,11 @@
     android:paddingHorizontal="@dimen/_10sdp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/lyTopMovie"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="gone"
+        tools:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -17,10 +20,12 @@
             android:id="@+id/imgTopMovie"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_400sdp"
+            android:layout_marginTop="52dp"
             android:background="@drawable/bg_category_border"
             android:padding="@dimen/_2sdp"
             android:scaleType="fitXY"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@drawable/img_test" />
