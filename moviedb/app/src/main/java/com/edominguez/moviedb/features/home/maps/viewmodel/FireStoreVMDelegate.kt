@@ -18,4 +18,10 @@ class FireStoreVMDelegate: BaseVMDelegate() {
     fun onUsersLocationResponseFailedPostValue() {
         _onUsersLocationResponseFailed.postValue(Unit)
     }
+
+    private val _onUserLocationSavedResponse = MutableLiveData<Boolean>()
+    val onUserLocationSavedResponse: LiveData<Boolean> get() = _onUserLocationSavedResponse
+    fun onUserLocationSavedResponsePostValue(isSaved:Boolean) {
+        _onUserLocationSavedResponse.postValue(isSaved)
+    }
 }

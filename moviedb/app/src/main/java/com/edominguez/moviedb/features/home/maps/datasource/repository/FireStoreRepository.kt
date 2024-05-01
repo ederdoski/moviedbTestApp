@@ -6,9 +6,11 @@ import com.edominguez.moviedb.features.home.maps.datasource.model.UserPositionRe
 import com.edominguez.moviedb.features.home.maps.datasource.service.FireStoreService
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.coroutines.tasks.await
+import org.joda.time.LocalDateTime
 
 class FireStoreRepository(private val fireStoreService: FireStoreService) {
-    suspend fun fetchUserLocations(): List<UserPositionResponseData> {
+
+    suspend fun getUserLocations(): List<UserPositionResponseData> {
         val task = fireStoreService.getUserLocations()
         val result = task.await()
 
@@ -19,11 +21,21 @@ class FireStoreRepository(private val fireStoreService: FireStoreService) {
                 val longitude = document.getString(FireStoreFields.LONGITUDE) ?: return@mapNotNull null
                 val createdAt = document.getString(FireStoreFields.CREATED_AT) ?: return@mapNotNull null
                 val latLng = LatLng(latitude.toDouble(), longitude.toDouble())
-                Log.e("document111", UserPositionResponseData(id, latLng, createdAt).toString())
                 UserPositionResponseData(id, latLng, createdAt)
             } catch (e: Exception) {
                 null
             }
+        }
+    }
+
+    suspend fun saveOrUpdateNewLocation(deviceID: String, latLng: LatLng, createdAt:String): Boolean {
+        val task = fireStoreService.saveOrUpdateUserPosition(deviceID, latLng, createdAt)
+
+        return try {
+            task.await()
+            true
+        } catch (e: Exception) {
+            false
         }
     }
 }

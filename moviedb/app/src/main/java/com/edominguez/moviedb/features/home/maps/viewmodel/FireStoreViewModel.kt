@@ -9,7 +9,6 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.launch
-import org.joda.time.LocalDate
 import org.joda.time.LocalDateTime
 
 class FireStoreViewModel(
@@ -22,7 +21,7 @@ class FireStoreViewModel(
     fun getUserLocations() {
         viewModelScope.launch(fireStoreVMDelegate.exceptionHandler()) {
             try {
-                val locations = fireStoreUseCase.execute()
+                val locations = fireStoreUseCase.getUserLocations()
                 fireStoreVMDelegate.onUsersLocationResponsePostValue(locations)
             } catch (exception: Exception) {
                 fireStoreVMDelegate.onUsersLocationResponseFailedPostValue()
@@ -30,24 +29,11 @@ class FireStoreViewModel(
         }
     }
 
-    fun saveOrUpdateNewLocation(deviceID:String, latLng: LatLng) {
-        val db = Firebase.firestore
-
-        val documentData = hashMapOf(
-            "latitude" to latLng.latitude.toString(),
-            "longitude" to latLng.longitude.toString(),
-            "created_at" to LocalDateTime.now().toString()
-        )
-
-        db.collection(FireStoreCollections.USERS)
-            .document(deviceID)
-            .set(documentData)
-            .addOnSuccessListener { documentReference ->
-                Log.e("TAG", "DocumentSnapshot added with ID: ${documentReference.toString()}")
-            }
-            .addOnFailureListener { e ->
-                Log.e("TAG", "Error adding document", e)
-            }
+    fun saveOrUpdateNewLocation(deviceID: String, latLng: LatLng) {
+        viewModelScope.launch {
+            val isSaved = fireStoreUseCase.saveOrUpdateNewLocation(deviceID, latLng)
+            fireStoreVMDelegate.onUserLocationSavedResponsePostValue(isSaved)
+        }
     }
 
 }

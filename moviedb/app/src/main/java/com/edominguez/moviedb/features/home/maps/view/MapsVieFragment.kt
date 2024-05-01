@@ -43,6 +43,7 @@ class MapsVieFragment : BaseFragment<MapsViewFragmentBinding>(), OnMapReadyCallb
     override fun listenToObserver() {
         observe(homeViewModel.homeVMDelegate.showUnknownError, this::onError)
         observe(fireStoreViewModel.fireStoreVMDelegate.onUsersLocationResponse, this::onUsersLocationResponse)
+        observe(fireStoreViewModel.fireStoreVMDelegate.onUserLocationSavedResponse, this::onUserLocationSavedResponse)
         observe(fireStoreViewModel.fireStoreVMDelegate.onUsersLocationResponseFailed, this::onUsersLocationResponseFailed)
 
     }
@@ -68,6 +69,10 @@ class MapsVieFragment : BaseFragment<MapsViewFragmentBinding>(), OnMapReadyCallb
 
     private fun onUsersLocationResponseFailed(event:Unit){
         showErrorMessage(getString(R.string.txt_error), getString(R.string.txt_error_user_positions))
+    }
+
+    private fun onUserLocationSavedResponse(isSaved:Boolean){
+        Log.e("onUserLocationSavede", isSaved.toString())
     }
 
     private fun initMap() {
