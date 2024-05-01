@@ -39,7 +39,6 @@ class UploadReviewsService(private val fireStoreDB: FirebaseFirestore, private v
                     }
             }
         }.addOnFailureListener { e ->
-            Log.e("UploadImage", "Failed to upload image", e)
             resultTask.setException(e)
         }
 
