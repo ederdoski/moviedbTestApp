@@ -12,5 +12,5 @@ sealed class ProtocolAction {
 
 
     /** HOME PROTOCOLS */
-    class OnSelectedHomeItem(val option: Int) : ProtocolAction()
+    class OnSelectedMenuItem(val option: Int) : ProtocolAction()
 }

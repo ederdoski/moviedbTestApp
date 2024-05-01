@@ -10,6 +10,7 @@ import android.os.Build
 import android.provider.Settings
 import android.text.Html
 import android.util.DisplayMetrics
+import android.util.Log
 import android.view.*
 import android.view.animation.Animation
 import android.widget.TextView
@@ -18,6 +19,8 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import com.edominguez.moviedb.R
 import com.edominguez.moviedb.core.network.PLATFORM
+import org.joda.time.format.DateTimeFormat
+import org.joda.time.format.DateTimeFormatter
 import java.io.File
 import java.util.*
 
@@ -125,20 +128,18 @@ class Functions {
             return "$PLATFORM - ${Build.MANUFACTURER} ${Build.MODEL}"
         }
 
-        //---- SCREEN
-
-        private fun getScreenWidth(activity: Activity): Int {
-            return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                val windowMetrics = activity.windowManager.currentWindowMetrics
-                val insets: Insets = windowMetrics.windowInsets
-                    .getInsetsIgnoringVisibility(WindowInsets.Type.systemBars())
-                windowMetrics.bounds.width() - insets.left - insets.right
-            } else {
-                val displayMetrics = DisplayMetrics()
-                activity.windowManager.defaultDisplay.getMetrics(displayMetrics)
-                displayMetrics.widthPixels
+        fun getFormatDate(date:String): String? {
+            return try {
+                val parser = DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ss.SSS")
+                val dateTime = parser.parseDateTime(date)
+                val formatter: DateTimeFormatter = DateTimeFormat.forPattern("dd MMMM hh:mm a")
+                dateTime.toString(formatter)
+            }catch (e:Exception) {
+                date
             }
         }
+
+        //---- SCREEN
 
         fun animatedView(view: ConstraintLayout, animation: Animation){
             view.startAnimation(animation)

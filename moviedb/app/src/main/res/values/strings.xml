@@ -14,10 +14,33 @@
     <string name="app_name">moviedb</string>
     <string name="txt_open">open file</string>
 
+    <!-- Maps -->
+    <string name="txt_device_id">Device ID</string>
+    <string name="txt_last_update">Ultima conexion</string>
+
+
+    <!-- Menu Options -->
 
     <string name="txt_menu_home">Inicio</string>
     <string name="txt_menu_maps">Mapas</string>
     <string name="txt_menu_upload">Cargar</string>
     <string name="txt_menu_profile">Perfil</string>
+    <string name="title_activity_maps">MapsActivity</string>
+
+    <!-- Notifications -->
+
+    <string name="notification_title_new_position_saved">Locacion Actualizada</string>
+    <string name="notification_description_new_position_saved">Ubicacion del usuario registrada en FireStore</string>
+    <string name="notification_description_new_position_saved_without_permits">No podemos mostrar una notificacion sin embargo la ubicacion del usuario ha sido registrada en FireStore</string>
+
+    <!-- Dialogs -->
+
+    <string name="txt_location_unknown">No podemos localizarte</string>
+    <string name="txt_dialog_tag">Dialog</string>
+    <string name="txt_error">Ha ocurrido un problema</string>
+    <string name="txt_error_gps_description">El GPS del dispositivo se encuentra apagado</string>
+    <string name="txt_error_user_positions">No podemos accedder a la lista de usuarios</string>
+    <string name="ok_btn">OK</string>
+    <string name="txt_no_granted_notification_permissions">Permisos para enviar notificaciones no fueron aceptados</string>
 
 </resources>

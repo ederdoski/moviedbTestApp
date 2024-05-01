@@ -1,6 +1,8 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("com.google.gms.google-services")
+    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
 }
 
 android {
@@ -67,6 +69,8 @@ dependencies {
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
+    implementation("androidx.appcompat:appcompat:1.6.1")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
@@ -77,14 +81,15 @@ dependencies {
 
     //    <-- ...............  Desing  ................. -->
 
-    //---- Material Desing
-    implementation ("com.google.android.material:material:1.11.0")
-
     //---- Skeleton layouts
     implementation ("com.facebook.shimmer:shimmer:0.5.0")
 
     //---- Text Responsive
     implementation ("com.intuit.sdp:sdp-android:1.0.6")
+
+
+    //---- Material Desing
+    implementation ("com.google.android.material:material:1.11.0")
 
     //    <-- ...............  Core  ................. -->
 
@@ -101,10 +106,17 @@ dependencies {
     implementation ("androidx.recyclerview:recyclerview-selection:1.1.0")
     implementation ("androidx.recyclerview:recyclerview:1.3.2")
 
+    //---- Firebase
+    implementation(platform("com.google.firebase:firebase-bom:32.3.1"))
+    implementation("com.google.firebase:firebase-firestore-ktx")
+
     //---- Koin dependency Injector
     implementation ("io.insert-koin:koin-android:3.1.2")
 
     //    <-- ............... Services ................. -->
+
+    //---- HTTP INTERCEPTOR
+    implementation ("com.squareup.okhttp3:logging-interceptor:4.9.2")
 
     //---- Retrofit
     implementation ("com.squareup.retrofit2:converter-scalars:2.5.0")
@@ -112,12 +124,16 @@ dependencies {
     implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation ("com.squareup.retrofit2:retrofit:2.9.0")
 
-    //---- HTTP INTERCEPTOR
-    implementation ("com.squareup.okhttp3:logging-interceptor:4.9.2")
-
     //    <-- ............... Utils ................. -->
+
+    //---- Joda time
+    implementation ("net.danlew:android.joda:2.10.12.2")
 
     //---- Glide
     implementation ("com.github.bumptech.glide:glide:4.11.0")
+
+    //---- Permissions
+    implementation ("com.github.fondesa:kpermissions:3.4.0")
+    implementation ("com.github.fondesa:kpermissions-coroutines:3.4.0")
 
 }

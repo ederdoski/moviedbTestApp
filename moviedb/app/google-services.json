@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "768739967424",
+    "project_id": "moviedbtest-b5d71",
+    "storage_bucket": "moviedbtest-b5d71.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:768739967424:android:e9c336c620f3b0368ac825",
+        "android_client_info": {
+          "package_name": "com.edominguez.moviedb"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAT4uOqyfAg-xt3agADrWWJrHt2wpU2mCY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

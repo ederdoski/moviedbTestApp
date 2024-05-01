@@ -3,12 +3,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/login_navigation"
-    app:startDestination="@id/home_entry">
+    app:startDestination="@id/home">
 
     <fragment
-        android:id="@+id/home_entry"
-        android:name="com.edominguez.moviedb.features.home.view.HomeViewFragment"
+        android:id="@+id/home"
+        android:name="com.edominguez.moviedb.features.home.movies.view.HomeViewFragment"
         tools:layout="@layout/home_view_fragment">
+        <action
+            android:id="@+id/action_go_to_maps"
+            app:destination="@id/maps" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/maps"
+        android:name="com.edominguez.moviedb.features.home.maps.view.MapsVieFragment"
+        tools:layout="@layout/maps_view_fragment">
+        <action
+            android:id="@+id/action_go_to_home"
+            app:destination="@id/home" />
     </fragment>
 
 </navigation>
