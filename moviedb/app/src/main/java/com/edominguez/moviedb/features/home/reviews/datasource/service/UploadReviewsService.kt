@@ -12,26 +12,6 @@ import com.google.firebase.storage.FirebaseStorage
 
 class UploadReviewsService(private val fireStoreDB: FirebaseFirestore, private val fireStorage: FirebaseStorage) {
 
-    /*fun uploadReview(uploadReviewsRequestData: UploadReviewsRequestData): Task<DocumentReference> {
-        val documentData = hashMapOf<String, Any>()
-
-        val imageUri = uploadReviewsRequestData.path
-        val storageRef = fireStorage.reference
-        val imagesRef = storageRef.child("images/${System.currentTimeMillis()}.jpg")
-        val uploadTask = imagesRef.putFile(imageUri)
-
-        uploadTask.addOnSuccessListener {
-            documentData[FireStoreFields.PATH] = it.storage
-            documentData[FireStoreFields.RATING] = uploadReviewsRequestData.rating
-            documentData[FireStoreFields.COMMENT] = uploadReviewsRequestData.comment
-        }.addOnFailureListener { exception ->
-            Log.e("exception", exception.toString())
-        }
-
-        return fireStoreDB.collection(FireStoreCollections.REVIEWS)
-            .add(documentData)
-    }*/
-
     fun uploadReview(uploadReviewsRequestData: UploadReviewsRequestData): Task<DocumentReference> {
         val documentData = hashMapOf<String, Any>()
 
