@@ -93,7 +93,7 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn"
-                style="@style/MainBtn"
+                style="@style/PositiveBtn"
                 android:layout_width="@dimen/space_0"
                 android:layout_marginTop="12dp"
                 android:layout_marginBottom="@dimen/_20sdp"

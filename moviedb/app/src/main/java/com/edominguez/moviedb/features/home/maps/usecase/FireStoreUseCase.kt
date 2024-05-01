@@ -6,7 +6,7 @@ import com.google.android.gms.maps.model.LatLng
 import org.joda.time.LocalDateTime
 
 
-class FireStoreUseCase (private val fireStoreRepository: FireStoreRepository) {
+class FireStoreUseCase(private val fireStoreRepository: FireStoreRepository) {
 
     suspend fun getUserLocations(): List<UserPositionResponseData> {
         return fireStoreRepository.getUserLocations()

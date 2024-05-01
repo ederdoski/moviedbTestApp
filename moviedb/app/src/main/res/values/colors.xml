@@ -3,7 +3,9 @@
 
     <color name="blue_dark">#032541</color>
 
-    <color name="primary">#FF5A70</color>
+    <color name="primary">#FF6347</color>
+    <color name="green">#0FB345</color>
+    <color name="red">#DC2100</color>
     <color name="light_black">#3B3B3B</color>
 
     <color name="purple_200">#FFBB86FC</color>
@@ -17,6 +19,7 @@
 
     <color name="gray">#666666</color>
     <color name="gray_light">#B6B6B6</color>
+    <color name="yellow">#FFD700</color>
     <color name="gray_light_alpha_3">#4DFFFFFF</color>
     <color name="gray_light_2">#CFCFCF</color>
 

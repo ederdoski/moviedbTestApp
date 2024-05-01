@@ -1,12 +1,10 @@
 package com.edominguez.moviedb.features.home.maps.datasource.repository
 
-import android.util.Log
 import com.edominguez.moviedb.features.home.maps.datasource.model.FireStoreFields
 import com.edominguez.moviedb.features.home.maps.datasource.model.UserPositionResponseData
 import com.edominguez.moviedb.features.home.maps.datasource.service.FireStoreService
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.coroutines.tasks.await
-import org.joda.time.LocalDateTime
 
 class FireStoreRepository(private val fireStoreService: FireStoreService) {
 

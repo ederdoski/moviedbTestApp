@@ -97,9 +97,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/txt_menu_upload"
                 android:textColor="@color/gray" />
-
         </LinearLayout>
-
 
         <LinearLayout
             android:id="@+id/lnItemProfile"
