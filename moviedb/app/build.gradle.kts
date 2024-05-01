@@ -79,6 +79,7 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 
+
     //    <-- ...............  Desing  ................. -->
 
     //---- Skeleton layouts
@@ -108,6 +109,7 @@ dependencies {
 
     //---- Firebase
     implementation(platform("com.google.firebase:firebase-bom:32.3.1"))
+    implementation("com.google.firebase:firebase-storage:20.3.0")
     implementation("com.google.firebase:firebase-firestore-ktx")
 
     //---- Koin dependency Injector

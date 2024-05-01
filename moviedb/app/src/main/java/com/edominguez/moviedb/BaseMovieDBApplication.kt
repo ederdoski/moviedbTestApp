@@ -8,6 +8,7 @@ import com.edominguez.moviedb.core.preferences.preferencesModule
 import com.edominguez.moviedb.features.home.maps.module.fireStoreModule
 import com.edominguez.moviedb.features.home.movies.module.homeModule
 import com.edominguez.moviedb.core.permissions.module.permissionsModule
+import com.edominguez.moviedb.features.home.reviews.module.uploadReviewsModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.GlobalContext
@@ -27,6 +28,7 @@ class BaseMovieDBApplication : Application() {
                     animationModule,
                     permissionsModule,
                     preferencesModule,
+                    uploadReviewsModule,
                     homeModule
                 )
             )

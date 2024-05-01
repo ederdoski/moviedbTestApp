@@ -21,6 +21,25 @@ class PermissionsDelegate(val context: Context) : KoinComponent {
         return allPermissionGranted
     }
 
+    fun requestReadAndWriteExternalStoragePermissions(fragment: Fragment, event: PermissionHelperEvents){
+        val requestPermission = fragment.permissionsBuilder(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE).build()
+        if(checkPermissionStatus(requestPermission) || Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            event.onSuccessPermissionsGranted()
+        }else {
+            requestPermission.addListener{result ->
+                var allPermissionGrandted = true
+                result.map {
+                    allPermissionGrandted = it.isGranted()
+                }
+                if(allPermissionGrandted)
+                    event.onSuccessPermissionsGranted()
+                else
+                    event.onDeniedPermissions()
+            }
+            requestPermission.send()
+        }
+    }
+
     fun requestPushNotificationPermissions(fragment: Fragment, event: PermissionHelperEvents) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             val requestPermission =

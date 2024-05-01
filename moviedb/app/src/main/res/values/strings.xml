@@ -33,11 +33,22 @@
     <string name="notification_description_new_position_saved">Ubicacion del usuario registrada en FireStore</string>
     <string name="notification_description_new_position_saved_without_permits">No podemos mostrar una notificacion sin embargo la ubicacion del usuario ha sido registrada en FireStore</string>
 
+    <!-- Review -->
+
+    <string name="reviews_btn_upload">Enviar Review</string>
+    <string name="reviews_btn_clear">Borrar Datos</string>
+    <string name="reviews_edt_hint">Puedes dejar aqui tu review, que te parecion la pelicula?, cual fue tu momento favorito?</string>
+
     <!-- Dialogs -->
 
+    <string name="txt_image_permission">Necesitamos estos permisos para poder acceder a la galeria de imagenes</string>
     <string name="txt_location_unknown">No podemos localizarte</string>
     <string name="txt_dialog_tag">Dialog</string>
     <string name="txt_error">Ha ocurrido un problema</string>
+    <string name="txt_atention">Atencion</string>
+    <string name="txt_review_success">Review enviado exitosamente</string>
+    <string name="txt_review_failed">Problemas al enviar el review</string>
+    <string name="txt_missing_data">Todos los campos son requeridos</string>
     <string name="txt_error_gps_description">El GPS del dispositivo se encuentra apagado</string>
     <string name="txt_error_user_positions">No podemos accedder a la lista de usuarios</string>
     <string name="ok_btn">OK</string>

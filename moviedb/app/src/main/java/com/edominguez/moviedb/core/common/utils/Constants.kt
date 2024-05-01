@@ -19,6 +19,7 @@ const val ZERO = 0
 const val FIRST_POSITION = 1
 const val GRID_QUANTITY = 3
 const val QUANTITY_MINUTES_TO_REFRESH_POSITION = 5L
+const val MAX_QUANTITY_OF_STARS = 5F
 const val THOUSAND = 1000
 const val TWO_SECONDS = 2000L
 const val ZERO_FLOAT = 0.0F
