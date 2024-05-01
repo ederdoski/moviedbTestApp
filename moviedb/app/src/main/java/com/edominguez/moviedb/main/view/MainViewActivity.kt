@@ -5,6 +5,7 @@ import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatDelegate
 import com.edominguez.moviedb.R
 import com.edominguez.moviedb.core.base.BaseActivity
+import com.edominguez.moviedb.core.common.utils.TWO_SECONDS
 import com.edominguez.moviedb.core.protocol.ProtocolAction
 import com.edominguez.moviedb.databinding.MainViewActivityBinding
 import com.edominguez.moviedb.features.home.movies.view.HomeActivity
@@ -12,8 +13,6 @@ import com.edominguez.moviedb.main.viewmodel.MainViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainViewActivity : BaseActivity<MainViewActivityBinding>() {
-
-    private val mainViewModel: MainViewModel by viewModel()
 
     fun listenToObserver() {}
 
@@ -40,7 +39,7 @@ class MainViewActivity : BaseActivity<MainViewActivityBinding>() {
     private fun delayScreen(){
         android.os.Handler().postDelayed({
             goHome()
-        }, 2000)
+        }, TWO_SECONDS)
     }
 
     //---- UI Methods

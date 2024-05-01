@@ -81,14 +81,15 @@ dependencies {
 
     //    <-- ...............  Desing  ................. -->
 
-    //---- Material Desing
-    implementation ("com.google.android.material:material:1.11.0")
-
     //---- Skeleton layouts
     implementation ("com.facebook.shimmer:shimmer:0.5.0")
 
     //---- Text Responsive
     implementation ("com.intuit.sdp:sdp-android:1.0.6")
+
+
+    //---- Material Desing
+    implementation ("com.google.android.material:material:1.11.0")
 
     //    <-- ...............  Core  ................. -->
 
@@ -105,14 +106,17 @@ dependencies {
     implementation ("androidx.recyclerview:recyclerview-selection:1.1.0")
     implementation ("androidx.recyclerview:recyclerview:1.3.2")
 
-    //---- Koin dependency Injector
-    implementation ("io.insert-koin:koin-android:3.1.2")
-
     //---- Firebase
     implementation(platform("com.google.firebase:firebase-bom:32.3.1"))
     implementation("com.google.firebase:firebase-firestore-ktx")
 
+    //---- Koin dependency Injector
+    implementation ("io.insert-koin:koin-android:3.1.2")
+
     //    <-- ............... Services ................. -->
+
+    //---- HTTP INTERCEPTOR
+    implementation ("com.squareup.okhttp3:logging-interceptor:4.9.2")
 
     //---- Retrofit
     implementation ("com.squareup.retrofit2:converter-scalars:2.5.0")
@@ -120,15 +124,16 @@ dependencies {
     implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation ("com.squareup.retrofit2:retrofit:2.9.0")
 
-    //---- HTTP INTERCEPTOR
-    implementation ("com.squareup.okhttp3:logging-interceptor:4.9.2")
-
     //    <-- ............... Utils ................. -->
+
+    //---- Joda time
+    implementation ("net.danlew:android.joda:2.10.12.2")
 
     //---- Glide
     implementation ("com.github.bumptech.glide:glide:4.11.0")
 
-    //---- Joda time
-    implementation ("net.danlew:android.joda:2.10.12.2")
+    //---- Permissions
+    implementation ("com.github.fondesa:kpermissions:3.4.0")
+    implementation ("com.github.fondesa:kpermissions-coroutines:3.4.0")
 
 }

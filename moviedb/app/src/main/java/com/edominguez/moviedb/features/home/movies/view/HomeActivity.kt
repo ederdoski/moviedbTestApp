@@ -30,6 +30,7 @@ class HomeActivity: BaseActivity<HomeViewActivityBinding>() {
 
     private fun setOnClickListeners() {
         binding.menu.lnItemHome.setOnClickListener {
+            goToHome()
         }
         binding.menu.lnItemMaps.setOnClickListener {
             goToMaps()
@@ -52,11 +53,11 @@ class HomeActivity: BaseActivity<HomeViewActivityBinding>() {
     }
 
     private fun goToHome() {
-        goTo(navController, R.id.action_home_to_maps)
+        goTo(navController, R.id.action_go_to_home)
     }
 
     private fun goToMaps() {
-        goTo(navController, R.id.action_home_to_maps)
+        goTo(navController, R.id.action_go_to_maps)
     }
 
     //---- Logic Methods

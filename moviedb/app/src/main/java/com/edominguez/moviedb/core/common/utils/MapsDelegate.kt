@@ -133,7 +133,7 @@ class MapsDelegate {
 
         scheduler.scheduleAtFixedRate({
             mapsListener.onNeedToSaveNewPosition(latLng)
-        }, 0, 1, TimeUnit.MINUTES)
+        }, 0, QUANTITY_MINUTES_TO_REFRESH_POSITION, TimeUnit.MINUTES)
     }
 
     fun addMarkerToMap(id: String, latLng: LatLng, createdAt: String) {

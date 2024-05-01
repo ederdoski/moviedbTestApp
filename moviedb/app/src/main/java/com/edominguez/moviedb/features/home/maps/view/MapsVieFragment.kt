@@ -2,14 +2,18 @@ package com.edominguez.moviedb.features.home.maps.view
 
 import android.location.Location
 import android.util.Log
+import android.widget.Toast
 import androidx.fragment.app.FragmentManager
 import com.edominguez.moviedb.R
 import com.edominguez.moviedb.core.base.BaseFragment
 import com.edominguez.moviedb.core.common.utils.Dialogs
 import com.edominguez.moviedb.core.common.utils.Functions
 import com.edominguez.moviedb.core.common.utils.MapsDelegate
+import com.edominguez.moviedb.core.common.utils.NotificationDelegate
 import com.edominguez.moviedb.core.extensions.observe
 import com.edominguez.moviedb.core.extensions.toVisible
+import com.edominguez.moviedb.core.permissions.PermissionHelperEvents
+import com.edominguez.moviedb.core.permissions.PermissionsDelegate
 import com.edominguez.moviedb.core.protocol.ProtocolAction
 import com.edominguez.moviedb.databinding.MapsViewFragmentBinding
 import com.edominguez.moviedb.features.home.maps.datasource.model.MapsMarkersViewInput
@@ -34,7 +38,9 @@ class MapsVieFragment : BaseFragment<MapsViewFragmentBinding>(), OnMapReadyCallb
 
     private val mapsDelegate: MapsDelegate by inject()
     private val homeViewModel: HomeViewModel by viewModel()
+    private val permissionsDelegate: PermissionsDelegate by inject()
     private val fireStoreViewModel: FireStoreViewModel by viewModel()
+    private val notificationDelegate: NotificationDelegate by inject()
 
     // ---- Base functions
 
@@ -45,7 +51,6 @@ class MapsVieFragment : BaseFragment<MapsViewFragmentBinding>(), OnMapReadyCallb
         observe(fireStoreViewModel.fireStoreVMDelegate.onUsersLocationResponse, this::onUsersLocationResponse)
         observe(fireStoreViewModel.fireStoreVMDelegate.onUserLocationSavedResponse, this::onUserLocationSavedResponse)
         observe(fireStoreViewModel.fireStoreVMDelegate.onUsersLocationResponseFailed, this::onUsersLocationResponseFailed)
-
     }
 
     // ---- Initialize your view here
@@ -60,6 +65,18 @@ class MapsVieFragment : BaseFragment<MapsViewFragmentBinding>(), OnMapReadyCallb
 
     private fun setOnClickListeners() {}
 
+    private fun checkNotificationPermissions() {
+        permissionsDelegate.requestPushNotificationPermissions(this, object : PermissionHelperEvents {
+            override fun onSuccessPermissionsGranted() {
+                createNewNotification()
+            }
+
+            override fun onDeniedPermissions() {
+                showErrorMessage(getString(R.string.txt_no_granted_notification_permissions), getString(R.string.notification_description_new_position_saved_without_permits))
+            }
+        })
+    }
+
     private fun onUsersLocationResponse(data: List<UserPositionResponseData>){
         mapsDelegate.resetMap()
         data.forEach{
@@ -71,8 +88,8 @@ class MapsVieFragment : BaseFragment<MapsViewFragmentBinding>(), OnMapReadyCallb
         showErrorMessage(getString(R.string.txt_error), getString(R.string.txt_error_user_positions))
     }
 
-    private fun onUserLocationSavedResponse(isSaved:Boolean){
-        Log.e("onUserLocationSavede", isSaved.toString())
+    private fun onUserLocationSavedResponse(isSaved:Boolean) {
+        checkNotificationPermissions()
     }
 
     private fun initMap() {
@@ -115,7 +132,6 @@ class MapsVieFragment : BaseFragment<MapsViewFragmentBinding>(), OnMapReadyCallb
     }
 
     override fun onNeedToSaveNewPosition(latLng: LatLng) {
-        Log.e("SAVE","onNeedToSaveNewPosition "+ latLng)
         fireStoreViewModel.getUserLocations()
         fireStoreViewModel.saveOrUpdateNewLocation(Functions.getDeviceID(requireContext()), latLng)
     }
@@ -127,6 +143,16 @@ class MapsVieFragment : BaseFragment<MapsViewFragmentBinding>(), OnMapReadyCallb
 
     override fun locationUnknown() {
         showErrorMessage(getString(R.string.txt_error), getString(R.string.txt_location_unknown))
+    }
+
+    private fun createNewNotification() {
+        val pendingIntent = notificationDelegate.createPendingIntent(HomeActivity::class.java, 0)
+
+        notificationDelegate.showNotification(
+            title = getString(R.string.notification_title_new_position_saved),
+            message = getString(R.string.notification_description_new_position_saved),
+            pendingIntent = pendingIntent
+        )
     }
 
     private fun showErrorMessage(title: String, description:String) {
