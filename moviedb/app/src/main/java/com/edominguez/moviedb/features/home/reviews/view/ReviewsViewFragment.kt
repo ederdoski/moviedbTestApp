@@ -85,6 +85,7 @@ class ReviewsViewFragment : BaseFragment<ReviewsViewFragmentBinding>() {
 
     private fun onReviewUploadedResponse(isSaved:Boolean) {
         if(isSaved) {
+            resetUI()
             showDialog(getString(R.string.txt_atention), getString(R.string.txt_review_success))
         }else{
             showDialog(getString(R.string.txt_error), getString(R.string.txt_review_failed))
