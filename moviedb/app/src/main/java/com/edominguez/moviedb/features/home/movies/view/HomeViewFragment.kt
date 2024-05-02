@@ -73,22 +73,18 @@ class HomeViewFragment : BaseFragment<HomeViewFragmentBinding>() {
             val gridLayoutManager = GridLayoutManager(requireContext(), GRID_QUANTITY)
             bindingView.movies.rvMovies.layoutManager = gridLayoutManager
             bindingView.movies.rvMovies.adapter = MoviesAdapter(
-                aMovies,
-                onItemClickListener = object : IOnItemClickViewHolder {
-                    override fun onItemClick(caller: View?, position: Int) {
-                        /*communication.onFragmentEvent(
-                            ProtocolAction.OnGoToTransactionDetails(
-                                aTransactions[position]
-                            )
-                        )*/
-                    }
-                }
+                dataList = aMovies,
+                onItemClickListener = moviesClickListener
             )
             setTopMovie(aMovies[Random.nextInt(aMovies.size)])
             //if (aTransactions.size < MAX_TRANSACTIONS) bindingView.cardTransaction.lyMoreTransactions.toInvisible()
         } else {
             //showNoTransactionLayout()
         }
+    }
+
+    private val moviesClickListener = object : IOnItemClickViewHolder {
+        override fun onItemClick(caller: View?, position: Int) {}
     }
 
     // ----- UI Methods

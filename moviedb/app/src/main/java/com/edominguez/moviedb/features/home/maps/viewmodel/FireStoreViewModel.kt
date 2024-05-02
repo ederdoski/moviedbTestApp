@@ -1,15 +1,10 @@
 package com.edominguez.moviedb.features.home.maps.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.edominguez.moviedb.features.home.maps.datasource.model.FireStoreCollections
 import com.edominguez.moviedb.features.home.maps.usecase.FireStoreUseCase
 import com.google.android.gms.maps.model.LatLng
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.launch
-import org.joda.time.LocalDateTime
 
 class FireStoreViewModel(
     private val fireStoreUseCase: FireStoreUseCase,
