@@ -23,12 +23,14 @@ android {
         debug {
             buildConfigField("String","AMBIENT", "\"DEBUG\"")
             buildConfigField("String","BASE_URL", "\"https://api.themoviedb.org\"")
+            buildConfigField("String","SESSION_TOKEN", "\"eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiOWQ4ZWY3YmU2ZGJlZjFhYTE5YjNjMjZiYmJkYWJhZSIsInN1YiI6IjY2MzEwY2NiNDgzMzNhMDEyMTkxYjNjYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.eIreqtQobAXRhFtoJq624imOEbWNf4xNH2LYnfH0wpg\"")
         }
 
         release {
             isMinifyEnabled = false
             buildConfigField("String","AMBIENT", "\"PROD\"")
             buildConfigField("String","BASE_URL", "\"https://api.themoviedb.org\"")
+            buildConfigField("String","SESSION_TOKEN", "\"eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiOWQ4ZWY3YmU2ZGJlZjFhYTE5YjNjMjZiYmJkYWJhZSIsInN1YiI6IjY2MzEwY2NiNDgzMzNhMDEyMTkxYjNjYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.eIreqtQobAXRhFtoJq624imOEbWNf4xNH2LYnfH0wpg\"")
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }

@@ -5,46 +5,39 @@
     android:id="@+id/login_navigation"
     app:startDestination="@id/home">
 
+    <!-- Global actions -->
+
+    <action
+        android:id="@+id/action_go_to_home"
+        app:destination="@id/home" />
+    <action
+        android:id="@+id/action_go_to_maps"
+        app:destination="@id/maps" />
+    <action
+        android:id="@+id/action_go_to_upload_reviews"
+        app:destination="@id/upload_reviews" />
+    <action
+        android:id="@+id/action_go_to_profile"
+        app:destination="@id/profile" />
+
     <fragment
         android:id="@+id/home"
         android:name="com.edominguez.moviedb.features.home.movies.view.HomeViewFragment"
-        tools:layout="@layout/home_view_fragment">
-        <action
-            android:id="@+id/action_go_to_maps"
-            app:destination="@id/maps" />
-        <action
-            android:id="@+id/action_go_to_upload_reviews"
-            app:destination="@id/upload_reviews" />
-        <action
-            android:id="@+id/action_go_to_profile"
-            app:destination="@id/profile" />
-    </fragment>
+        tools:layout="@layout/home_view_fragment"/>
 
     <fragment
         android:id="@+id/maps"
-        android:name="com.edominguez.moviedb.features.home.maps.view.MapsVieFragment"
-        tools:layout="@layout/maps_view_fragment">
-        <action
-            android:id="@+id/action_go_to_home"
-            app:destination="@id/home" />
-    </fragment>
+        android:name="com.edominguez.moviedb.features.home.maps.view.MapsViewFragment"
+        tools:layout="@layout/maps_view_fragment"/>
 
     <fragment
         android:id="@+id/upload_reviews"
         android:name="com.edominguez.moviedb.features.home.reviews.view.ReviewsViewFragment"
-        tools:layout="@layout/reviews_view_fragment">
-        <action
-            android:id="@+id/action_go_to_home"
-            app:destination="@id/home" />
-    </fragment>
+        tools:layout="@layout/reviews_view_fragment"/>
 
     <fragment
         android:id="@+id/profile"
         android:name="com.edominguez.moviedb.features.home.profile.view.ProfileViewFragment"
-        tools:layout="@layout/profile_layout_view_fragment">
-        <action
-            android:id="@+id/action_go_to_home"
-            app:destination="@id/home" />
-    </fragment>
+        tools:layout="@layout/profile_layout_view_fragment"/>
 
 </navigation>

@@ -21,8 +21,8 @@ class HomeActivity: BaseActivity<HomeViewActivityBinding>() {
 
         const val BOTTOM_MENU_ITEM_HOME = 1
         const val BOTTOM_MENU_ITEM_MAPS = 2
-        const val BOTTOM_MENU_ITEM_UPLOAD_REVIEWS = 3
         const val BOTTOM_MENU_ITEM_PROFILE = 4
+        const val BOTTOM_MENU_ITEM_UPLOAD_REVIEWS = 3
     }
 
     override fun init() {
@@ -62,12 +62,12 @@ class HomeActivity: BaseActivity<HomeViewActivityBinding>() {
         goTo(navController, R.id.action_go_to_maps)
     }
 
-    private fun goToUploadReview() {
-        goTo(navController, R.id.action_go_to_upload_reviews)
-    }
-
     private fun goToProfile() {
         goTo(navController, R.id.action_go_to_profile)
+    }
+
+    private fun goToUploadReview() {
+        goTo(navController, R.id.action_go_to_upload_reviews)
     }
 
     //---- Logic Methods

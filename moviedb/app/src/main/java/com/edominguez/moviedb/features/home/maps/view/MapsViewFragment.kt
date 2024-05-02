@@ -27,7 +27,7 @@ import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-class MapsVieFragment : BaseFragment<MapsViewFragmentBinding>(), OnMapReadyCallback, MapsDelegate.MapsListener {
+class MapsViewFragment : BaseFragment<MapsViewFragmentBinding>(), OnMapReadyCallback, MapsDelegate.MapsListener {
 
     private val mapsDelegate: MapsDelegate by inject()
     private val homeViewModel: HomeViewModel by viewModel()
@@ -37,7 +37,7 @@ class MapsVieFragment : BaseFragment<MapsViewFragmentBinding>(), OnMapReadyCallb
 
     // ---- Base functions
 
-    override fun screenName() = "MapsVieFragment"
+    override fun screenName() = "MapsViewFragment"
 
     override fun listenToObserver() {
         observe(homeViewModel.homeVMDelegate.showUnknownError, this::onError)

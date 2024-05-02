@@ -2,6 +2,8 @@ package com.edominguez.moviedb.features.home.movies.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.edominguez.moviedb.BuildConfig
+import com.edominguez.moviedb.core.common.utils.FIRST_PAGE
 import com.edominguez.moviedb.core.network.NetworkResponse
 import com.edominguez.moviedb.features.home.movies.usecase.HomeUseCase
 import kotlinx.coroutines.launch
@@ -15,9 +17,9 @@ class HomeViewModel (
     /** Movies Services **/
 
     fun getMovies(filter:String) {
-        viewModelScope.launch (homeVMDelegate.exceptionHandler()){
+        viewModelScope.launch (homeVMDelegate.exceptionHandler()) {
             homeVMDelegate.loadingPostValue(true)
-            homeUseCase.bindMovie(1, filter)
+            homeUseCase.bindMovie(FIRST_PAGE, filter)
             val response = NetworkResponse(homeUseCase.getMovies())
             when (response.network.httpCode) {
                 HttpURLConnection.HTTP_OK -> {
@@ -30,22 +32,7 @@ class HomeViewModel (
         }
     }
 
-    fun getMorePopularUser() {
-        viewModelScope.launch (homeVMDelegate.exceptionHandler()){
-            homeVMDelegate.loadingPostValue(true)
-            val response = NetworkResponse(homeUseCase.getMorePopularUser())
-            when (response.network.httpCode) {
-                HttpURLConnection.HTTP_OK -> {
-                    homeVMDelegate.onListMovieResponsePostValue(response.data!!)
-                }
-                else -> {
-                    homeVMDelegate.showUnknownErrorPostValue(Throwable(response.network.message))
-                }
-            }
-        }
-    }
-
     fun setSession() {
-        homeUseCase.setSession("eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiOWQ4ZWY3YmU2ZGJlZjFhYTE5YjNjMjZiYmJkYWJhZSIsInN1YiI6IjY2MzEwY2NiNDgzMzNhMDEyMTkxYjNjYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.eIreqtQobAXRhFtoJq624imOEbWNf4xNH2LYnfH0wpg")
+        homeUseCase.setSession(BuildConfig.SESSION_TOKEN)
     }
 }
