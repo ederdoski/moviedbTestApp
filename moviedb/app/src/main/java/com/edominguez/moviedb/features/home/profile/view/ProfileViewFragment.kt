@@ -10,6 +10,7 @@ import com.edominguez.moviedb.core.extensions.observe
 import com.edominguez.moviedb.core.protocol.ProtocolAction
 import com.edominguez.moviedb.databinding.ProfileLayoutViewFragmentBinding
 import com.edominguez.moviedb.features.home.movies.view.HomeActivity
+import com.edominguez.moviedb.features.home.movies.view.cell.MoviesAdapter
 import com.edominguez.moviedb.features.home.profile.datasource.model.ReviewsResponseData
 import com.edominguez.moviedb.features.home.profile.view.cell.ReviewsAdapter
 import com.edominguez.moviedb.features.home.profile.viewmodel.ProfileViewModel
@@ -32,6 +33,7 @@ class ProfileViewFragment : BaseFragment<ProfileLayoutViewFragmentBinding>() {
     // ---- Initialize your view here
 
     override fun init() {
+        initAdapter()
         setOnClickListeners()
         profileViewModel.getUserReviews()
         communication.onFragmentEvent(ProtocolAction.OnSelectedMenuItem(HomeActivity.BOTTOM_MENU_ITEM_PROFILE))
@@ -40,19 +42,22 @@ class ProfileViewFragment : BaseFragment<ProfileLayoutViewFragmentBinding>() {
     // ----- Logic Methods
     private fun setOnClickListeners() { }
 
-    private fun onListReviewsResponse(data:List<ReviewsResponseData>) {
-        if (data.isNotEmpty()) {
-            bindingView.rvReviews.adapter = ReviewsAdapter(
-                dataList = data.toMutableList(),
-                onItemClickListener = reviewClickListener
-            )
-        } else {
-            showDialog(getString(R.string.txt_atention), getString(R.string.txt_insufficient_data))
-        }
+    private fun initAdapter() {
+        val tmpAdapter = ReviewsAdapter(onItemClickListener = reviewClickListener)
+        bindingView.rvReviews.adapter = tmpAdapter
+    }
+
+    private fun setListOfReviews(aReviews: List<ReviewsResponseData>) {
+        val tmpAdapter = bindingView.rvReviews.adapter as ReviewsAdapter
+        tmpAdapter.addData(aReviews)
     }
 
     private val reviewClickListener = object : IOnItemClickViewHolder {
         override fun onItemClick(caller: View?, position: Int) {}
+    }
+
+    private fun onListReviewsResponse(data:List<ReviewsResponseData>) {
+        setListOfReviews(data)
     }
 
     private fun onListReviewsResponseFailed(event: Unit) {
