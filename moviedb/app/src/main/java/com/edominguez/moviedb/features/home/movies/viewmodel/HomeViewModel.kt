@@ -8,6 +8,7 @@ import com.edominguez.moviedb.core.network.NetworkResponse
 import com.edominguez.moviedb.features.home.movies.usecase.HomeUseCase
 import kotlinx.coroutines.launch
 import java.net.HttpURLConnection
+import javax.net.ssl.HttpsURLConnection
 
 class HomeViewModel (
     private val homeUseCase: HomeUseCase,
@@ -16,13 +17,21 @@ class HomeViewModel (
 
     /** Movies Services **/
 
-    fun getMovies(filter:String) {
+    private var movieListActPage = 1
+    private var movieListMaxPage: Boolean = false
+
+    fun getMovies(filter:String, enablePagination: Boolean = true) {
         viewModelScope.launch (homeVMDelegate.exceptionHandler()) {
             homeVMDelegate.loadingPostValue(true)
-            homeUseCase.bindMovie(FIRST_PAGE, filter)
+            homeUseCase.bindMovie(movieListActPage, filter)
             val response = NetworkResponse(homeUseCase.getMovies())
             when (response.network.httpCode) {
                 HttpURLConnection.HTTP_OK -> {
+                    if (movieListActPage == response.data!!.totalPages) {
+                        movieListMaxPage = true
+                    }else{
+                        if (enablePagination) movieListActPage++
+                    }
                     homeVMDelegate.onListMovieResponsePostValue(response.data!!)
                 }
                 else -> {

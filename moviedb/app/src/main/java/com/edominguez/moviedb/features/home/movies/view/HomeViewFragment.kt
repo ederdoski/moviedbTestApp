@@ -3,6 +3,7 @@ package com.edominguez.moviedb.features.home.movies.view
 import android.view.View
 import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.edominguez.moviedb.R
 import com.edominguez.moviedb.core.base.BaseFragment
 import com.edominguez.moviedb.core.base.IOnItemClickViewHolder
@@ -40,8 +41,9 @@ class HomeViewFragment : BaseFragment<HomeViewFragmentBinding>() {
 
     override fun init() {
         bindUI()
+        initAdapter()
         setOnClickListeners()
-      //  homeViewModel.getMovies(MOVIE_FILTER_POPULAR)
+        homeViewModel.getMovies(MOVIE_FILTER_POPULAR)
     }
 
     // ----- Logic Methods
@@ -61,23 +63,36 @@ class HomeViewFragment : BaseFragment<HomeViewFragmentBinding>() {
             homeViewModel.getMovies(MOVIE_FILTER_TOP_RATED)
             changeColorOfFilter(bindingView.filters.txtFilterBestRating)
         }
+        setRecyclerListener()
+    }
+
+    private fun setRecyclerListener() {
+        bindingView.movies.rvMovies.addOnScrollListener(object :
+            RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                if (!bindingView.movies.rvMovies.canScrollVertically(1)) {
+                    homeViewModel.getMovies(MOVIE_FILTER_POPULAR)
+                }
+            }
+        })
+    }
+
+    private fun initAdapter() {
+        val tmpAdapter = MoviesAdapter(onItemClickListener = moviesClickListener)
+        val gridLayoutManager = GridLayoutManager(requireContext(), GRID_QUANTITY)
+        bindingView.movies.rvMovies.layoutManager = gridLayoutManager
+        bindingView.movies.rvMovies.adapter = tmpAdapter
+    }
+
+    private fun setListOfMovies(aMovies: ArrayList<MovieData>) {
+        val tmpAdapter = bindingView.movies.rvMovies.adapter as MoviesAdapter
+        tmpAdapter.addData(aMovies)
     }
 
     private fun onListMovieResponse(moviesResponseData: MoviesResponseData) {
-        if (moviesResponseData.results.isNotEmpty()) {
-
-            val aMovies = moviesResponseData.results
-            val gridLayoutManager = GridLayoutManager(requireContext(), GRID_QUANTITY)
-            bindingView.movies.rvMovies.layoutManager = gridLayoutManager
-            bindingView.movies.rvMovies.adapter = MoviesAdapter(
-                dataList = aMovies,
-                onItemClickListener = moviesClickListener
-            )
-            setTopMovie(aMovies[Random.nextInt(aMovies.size)])
-            //if (aTransactions.size < MAX_TRANSACTIONS) bindingView.cardTransaction.lyMoreTransactions.toInvisible()
-        } else {
-            //showNoTransactionLayout()
-        }
+        val aMovies = moviesResponseData.results
+        setListOfMovies(aMovies)
+        setTopMovie(aMovies[Random.nextInt(aMovies.size)])
     }
 
     private val moviesClickListener = object : IOnItemClickViewHolder {
