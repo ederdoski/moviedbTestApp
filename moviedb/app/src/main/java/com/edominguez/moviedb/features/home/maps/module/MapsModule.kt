@@ -12,39 +12,39 @@ import org.koin.core.module.Module
 import org.koin.dsl.module
 
 
-val fireStoreModule: Module = module {
+val mapsModule: Module = module {
 
     //--- Inject viewModel
     viewModel {
         MapsViewModel(
-            fireStoreUseCase = get(),
-            fireStoreVMDelegate = get()
+            mapsUseCase = get(),
+            mapsVMDelegate = get()
         )
     }
     //--- Inject repository
     single<MapsRepository> {
         MapsRepository(
-            fireStoreService = get()
+            mapsService = get()
         )
     }
 
     //--- Inject useCase
-    single { providerFireStoreUseCase(get()) }
+    single { providerMapsUseCase(get()) }
 
     //--- Inject service
-    single { providerFireStoreService() }
+    single { providerMapsService() }
 
-    factory { providerFireStoreVMDelegate() }
+    factory { providerMapsMDelegate() }
 }
 
-fun providerFireStoreVMDelegate(): MapsVMDelegate {
+fun providerMapsMDelegate(): MapsVMDelegate {
     return MapsVMDelegate()
 }
 
-fun providerFireStoreService(): MapsService {
+fun providerMapsService(): MapsService {
     return MapsService(Firebase.firestore)
 }
 
-fun providerFireStoreUseCase(fireStoreRepository: MapsRepository): MapsUseCase {
-    return MapsUseCase(fireStoreRepository)
+fun providerMapsUseCase(mapsRepository: MapsRepository): MapsUseCase {
+    return MapsUseCase(mapsRepository)
 }

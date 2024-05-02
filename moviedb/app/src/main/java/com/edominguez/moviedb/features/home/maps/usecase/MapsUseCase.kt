@@ -6,14 +6,14 @@ import com.google.android.gms.maps.model.LatLng
 import org.joda.time.LocalDateTime
 
 
-class MapsUseCase(private val fireStoreRepository: MapsRepository) {
+class MapsUseCase(private val mapsRepository: MapsRepository) {
 
     suspend fun getUserLocations(): List<UserPositionResponseData> {
-        return fireStoreRepository.getUserLocations()
+        return mapsRepository.getUserLocations()
     }
 
     suspend fun saveOrUpdateNewLocation(deviceID: String, latLng: LatLng): Boolean {
-        return fireStoreRepository.saveOrUpdateNewLocation(deviceID, latLng, LocalDateTime.now().toString())
+        return mapsRepository.saveOrUpdateNewLocation(deviceID, latLng, LocalDateTime.now().toString())
     }
 
 }

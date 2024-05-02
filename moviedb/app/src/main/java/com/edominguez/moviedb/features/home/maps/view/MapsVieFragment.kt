@@ -31,8 +31,8 @@ class MapsVieFragment : BaseFragment<MapsViewFragmentBinding>(), OnMapReadyCallb
 
     private val mapsDelegate: MapsDelegate by inject()
     private val homeViewModel: HomeViewModel by viewModel()
+    private val mapsViewModel: MapsViewModel by viewModel()
     private val permissionsDelegate: PermissionsDelegate by inject()
-    private val fireStoreViewModel: MapsViewModel by viewModel()
     private val notificationDelegate: NotificationDelegate by inject()
 
     // ---- Base functions
@@ -41,9 +41,9 @@ class MapsVieFragment : BaseFragment<MapsViewFragmentBinding>(), OnMapReadyCallb
 
     override fun listenToObserver() {
         observe(homeViewModel.homeVMDelegate.showUnknownError, this::onError)
-        observe(fireStoreViewModel.fireStoreVMDelegate.onUsersLocationResponse, this::onUsersLocationResponse)
-        observe(fireStoreViewModel.fireStoreVMDelegate.onUserLocationSavedResponse, this::onUserLocationSavedResponse)
-        observe(fireStoreViewModel.fireStoreVMDelegate.onUsersLocationResponseFailed, this::onUsersLocationResponseFailed)
+        observe(mapsViewModel.mapsVMDelegate.onUsersLocationResponse, this::onUsersLocationResponse)
+        observe(mapsViewModel.mapsVMDelegate.onUserLocationSavedResponse, this::onUserLocationSavedResponse)
+        observe(mapsViewModel.mapsVMDelegate.onUsersLocationResponseFailed, this::onUsersLocationResponseFailed)
     }
 
     // ---- Initialize your view here
@@ -112,7 +112,7 @@ class MapsVieFragment : BaseFragment<MapsViewFragmentBinding>(), OnMapReadyCallb
     }
 
     override fun onMapReady(map: GoogleMap) {
-        fireStoreViewModel.getUserLocations()
+        mapsViewModel.getUserLocations()
         mapsDelegate.setGoogleMap(map)
         startGetLocationFlow()
         mapsDelegate.checkClicksInMarker(this)
@@ -125,8 +125,8 @@ class MapsVieFragment : BaseFragment<MapsViewFragmentBinding>(), OnMapReadyCallb
     }
 
     override fun onNeedToSaveNewPosition(latLng: LatLng) {
-        fireStoreViewModel.getUserLocations()
-        fireStoreViewModel.saveOrUpdateNewLocation(Functions.getDeviceID(requireContext()), latLng)
+        mapsViewModel.getUserLocations()
+        mapsViewModel.saveOrUpdateNewLocation(Functions.getDeviceID(requireContext()), latLng)
     }
 
     override fun onLocationObtained(location: Location) {

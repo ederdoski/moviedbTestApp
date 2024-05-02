@@ -7,27 +7,27 @@ import com.google.android.gms.maps.model.LatLng
 import kotlinx.coroutines.launch
 
 class MapsViewModel(
-    private val fireStoreUseCase: MapsUseCase,
-    val fireStoreVMDelegate: MapsVMDelegate
+    private val mapsUseCase: MapsUseCase,
+    val mapsVMDelegate: MapsVMDelegate
 ) : ViewModel() {
 
     /** Maps Services **/
 
     fun getUserLocations() {
-        viewModelScope.launch(fireStoreVMDelegate.exceptionHandler()) {
+        viewModelScope.launch(mapsVMDelegate.exceptionHandler()) {
             try {
-                val locations = fireStoreUseCase.getUserLocations()
-                fireStoreVMDelegate.onUsersLocationResponsePostValue(locations)
+                val locations = mapsUseCase.getUserLocations()
+                mapsVMDelegate.onUsersLocationResponsePostValue(locations)
             } catch (exception: Exception) {
-                fireStoreVMDelegate.onUsersLocationResponseFailedPostValue()
+                mapsVMDelegate.onUsersLocationResponseFailedPostValue()
             }
         }
     }
 
     fun saveOrUpdateNewLocation(deviceID: String, latLng: LatLng) {
         viewModelScope.launch {
-            val isSaved = fireStoreUseCase.saveOrUpdateNewLocation(deviceID, latLng)
-            fireStoreVMDelegate.onUserLocationSavedResponsePostValue(isSaved)
+            val isSaved = mapsUseCase.saveOrUpdateNewLocation(deviceID, latLng)
+            mapsVMDelegate.onUserLocationSavedResponsePostValue(isSaved)
         }
     }
 

@@ -6,10 +6,10 @@ import com.edominguez.moviedb.features.home.maps.datasource.service.MapsService
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.coroutines.tasks.await
 
-class MapsRepository(private val fireStoreService: MapsService) {
+class MapsRepository(private val mapsService: MapsService) {
 
     suspend fun getUserLocations(): List<UserPositionResponseData> {
-        val task = fireStoreService.getUserLocations()
+        val task = mapsService.getUserLocations()
         val result = task.await()
 
         return result.documents.mapNotNull { document ->
@@ -27,7 +27,7 @@ class MapsRepository(private val fireStoreService: MapsService) {
     }
 
     suspend fun saveOrUpdateNewLocation(deviceID: String, latLng: LatLng, createdAt:String): Boolean {
-        val task = fireStoreService.saveOrUpdateUserPosition(deviceID, latLng, createdAt)
+        val task = mapsService.saveOrUpdateUserPosition(deviceID, latLng, createdAt)
 
         return try {
             task.await()
