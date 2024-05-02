@@ -22,6 +22,7 @@ class HomeActivity: BaseActivity<HomeViewActivityBinding>() {
         const val BOTTOM_MENU_ITEM_HOME = 1
         const val BOTTOM_MENU_ITEM_MAPS = 2
         const val BOTTOM_MENU_ITEM_UPLOAD_REVIEWS = 3
+        const val BOTTOM_MENU_ITEM_PROFILE = 4
     }
 
     override fun init() {
@@ -36,11 +37,11 @@ class HomeActivity: BaseActivity<HomeViewActivityBinding>() {
         binding.menu.lnItemMaps.setOnClickListener {
             goToMaps()
         }
+        binding.menu.lnItemProfile.setOnClickListener {
+            goToProfile()
+        }
         binding.menu.lnItemUpload.setOnClickListener {
             goToUploadReview()
-        }
-        binding.menu.lnItemProfile.setOnClickListener {
-
         }
     }
 
@@ -63,6 +64,10 @@ class HomeActivity: BaseActivity<HomeViewActivityBinding>() {
 
     private fun goToUploadReview() {
         goTo(navController, R.id.action_go_to_upload_reviews)
+    }
+
+    private fun goToProfile() {
+        goTo(navController, R.id.action_go_to_profile)
     }
 
     //---- Logic Methods
@@ -108,10 +113,10 @@ class HomeActivity: BaseActivity<HomeViewActivityBinding>() {
                 binding.menu.tvItemUpload
             )
 
-            /*BOTTOM_MENU_ITEM_PERFIL -> enableMenuItem(
+            BOTTOM_MENU_ITEM_PROFILE -> enableMenuItem(
                 binding.menu.imgProfile,
                 binding.menu.tvItemProfile
-            )*/
+            )
         }
     }
 
