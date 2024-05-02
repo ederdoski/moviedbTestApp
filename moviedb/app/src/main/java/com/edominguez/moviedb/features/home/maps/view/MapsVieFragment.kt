@@ -1,8 +1,6 @@
 package com.edominguez.moviedb.features.home.maps.view
 
 import android.location.Location
-import android.util.Log
-import android.widget.Toast
 import androidx.fragment.app.FragmentManager
 import com.edominguez.moviedb.R
 import com.edominguez.moviedb.core.base.BaseFragment
@@ -18,18 +16,13 @@ import com.edominguez.moviedb.core.protocol.ProtocolAction
 import com.edominguez.moviedb.databinding.MapsViewFragmentBinding
 import com.edominguez.moviedb.features.home.maps.datasource.model.MapsMarkersViewInput
 import com.edominguez.moviedb.features.home.maps.datasource.model.UserPositionResponseData
-import com.edominguez.moviedb.features.home.maps.viewmodel.FireStoreViewModel
+import com.edominguez.moviedb.features.home.maps.viewmodel.MapsViewModel
 import com.edominguez.moviedb.features.home.movies.view.HomeActivity
 import com.edominguez.moviedb.features.home.movies.viewmodel.HomeViewModel
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
-import org.joda.time.DateTime
-import org.joda.time.LocalDate
-import org.joda.time.LocalDateTime
-import org.joda.time.format.DateTimeFormat
-import org.joda.time.format.DateTimeFormatter
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -38,8 +31,8 @@ class MapsVieFragment : BaseFragment<MapsViewFragmentBinding>(), OnMapReadyCallb
 
     private val mapsDelegate: MapsDelegate by inject()
     private val homeViewModel: HomeViewModel by viewModel()
+    private val mapsViewModel: MapsViewModel by viewModel()
     private val permissionsDelegate: PermissionsDelegate by inject()
-    private val fireStoreViewModel: FireStoreViewModel by viewModel()
     private val notificationDelegate: NotificationDelegate by inject()
 
     // ---- Base functions
@@ -48,9 +41,9 @@ class MapsVieFragment : BaseFragment<MapsViewFragmentBinding>(), OnMapReadyCallb
 
     override fun listenToObserver() {
         observe(homeViewModel.homeVMDelegate.showUnknownError, this::onError)
-        observe(fireStoreViewModel.fireStoreVMDelegate.onUsersLocationResponse, this::onUsersLocationResponse)
-        observe(fireStoreViewModel.fireStoreVMDelegate.onUserLocationSavedResponse, this::onUserLocationSavedResponse)
-        observe(fireStoreViewModel.fireStoreVMDelegate.onUsersLocationResponseFailed, this::onUsersLocationResponseFailed)
+        observe(mapsViewModel.mapsVMDelegate.onUsersLocationResponse, this::onUsersLocationResponse)
+        observe(mapsViewModel.mapsVMDelegate.onUserLocationSavedResponse, this::onUserLocationSavedResponse)
+        observe(mapsViewModel.mapsVMDelegate.onUsersLocationResponseFailed, this::onUsersLocationResponseFailed)
     }
 
     // ---- Initialize your view here
@@ -119,7 +112,7 @@ class MapsVieFragment : BaseFragment<MapsViewFragmentBinding>(), OnMapReadyCallb
     }
 
     override fun onMapReady(map: GoogleMap) {
-        fireStoreViewModel.getUserLocations()
+        mapsViewModel.getUserLocations()
         mapsDelegate.setGoogleMap(map)
         startGetLocationFlow()
         mapsDelegate.checkClicksInMarker(this)
@@ -132,8 +125,8 @@ class MapsVieFragment : BaseFragment<MapsViewFragmentBinding>(), OnMapReadyCallb
     }
 
     override fun onNeedToSaveNewPosition(latLng: LatLng) {
-        fireStoreViewModel.getUserLocations()
-        fireStoreViewModel.saveOrUpdateNewLocation(Functions.getDeviceID(requireContext()), latLng)
+        mapsViewModel.getUserLocations()
+        mapsViewModel.saveOrUpdateNewLocation(Functions.getDeviceID(requireContext()), latLng)
     }
 
     override fun onLocationObtained(location: Location) {

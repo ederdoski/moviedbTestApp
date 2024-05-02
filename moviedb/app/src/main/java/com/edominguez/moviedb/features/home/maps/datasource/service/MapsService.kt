@@ -7,7 +7,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.android.gms.maps.model.LatLng
 
-class FireStoreService(private val fireStoreDB: FirebaseFirestore) {
+class MapsService(private val fireStoreDB: FirebaseFirestore) {
 
     fun getUserLocations(): Task<QuerySnapshot> {
         return fireStoreDB.collection(FireStoreCollections.USERS).get()
