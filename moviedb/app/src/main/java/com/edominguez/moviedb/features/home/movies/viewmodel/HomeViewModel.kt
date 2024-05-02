@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.edominguez.moviedb.BuildConfig
+import com.edominguez.moviedb.BuildConfig.TMDB_TOKEN
 import com.edominguez.moviedb.core.common.utils.FIRST_PAGE
 import com.edominguez.moviedb.core.network.NetworkResponse
 import com.edominguez.moviedb.features.home.movies.usecase.HomeUseCase
@@ -43,6 +44,6 @@ class HomeViewModel (
     }
 
     fun setSession() {
-        homeUseCase.setSession(BuildConfig.SESSION_TOKEN)
+        homeUseCase.setSession(TMDB_TOKEN)
     }
 }

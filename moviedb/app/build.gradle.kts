@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -17,20 +19,29 @@ android {
         versionName = "1.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables { useSupportLibrary = true }
+
+
+
     }
 
     buildTypes {
+
+        val keystoreFile = project.rootProject.file("local.properties")
+        val properties = Properties()
+        properties.load(keystoreFile.inputStream())
+        val TMDB_TOKEN = properties.getProperty("TMDB_TOKEN")
+
         debug {
             buildConfigField("String","AMBIENT", "\"DEBUG\"")
+            buildConfigField("String", "TMDB_TOKEN", "\"${TMDB_TOKEN}\"")
             buildConfigField("String","BASE_URL", "\"https://api.themoviedb.org\"")
-            buildConfigField("String","SESSION_TOKEN", "\"eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiOWQ4ZWY3YmU2ZGJlZjFhYTE5YjNjMjZiYmJkYWJhZSIsInN1YiI6IjY2MzEwY2NiNDgzMzNhMDEyMTkxYjNjYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.eIreqtQobAXRhFtoJq624imOEbWNf4xNH2LYnfH0wpg\"")
         }
 
         release {
             isMinifyEnabled = false
             buildConfigField("String","AMBIENT", "\"PROD\"")
+            buildConfigField("String", "TMDB_TOKEN", "\"${TMDB_TOKEN}\"")
             buildConfigField("String","BASE_URL", "\"https://api.themoviedb.org\"")
-            buildConfigField("String","SESSION_TOKEN", "\"eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiOWQ4ZWY3YmU2ZGJlZjFhYTE5YjNjMjZiYmJkYWJhZSIsInN1YiI6IjY2MzEwY2NiNDgzMzNhMDEyMTkxYjNjYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.eIreqtQobAXRhFtoJq624imOEbWNf4xNH2LYnfH0wpg\"")
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
