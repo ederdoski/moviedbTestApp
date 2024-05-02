@@ -2,11 +2,11 @@ package com.edominguez.moviedb.features.home.maps.datasource.repository
 
 import com.edominguez.moviedb.features.home.maps.datasource.model.FireStoreFields
 import com.edominguez.moviedb.features.home.maps.datasource.model.UserPositionResponseData
-import com.edominguez.moviedb.features.home.maps.datasource.service.FireStoreService
+import com.edominguez.moviedb.features.home.maps.datasource.service.MapsService
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.coroutines.tasks.await
 
-class FireStoreRepository(private val fireStoreService: FireStoreService) {
+class MapsRepository(private val fireStoreService: MapsService) {
 
     suspend fun getUserLocations(): List<UserPositionResponseData> {
         val task = fireStoreService.getUserLocations()

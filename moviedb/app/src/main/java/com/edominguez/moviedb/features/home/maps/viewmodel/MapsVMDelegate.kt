@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.edominguez.moviedb.core.base.BaseVMDelegate
 import com.edominguez.moviedb.features.home.maps.datasource.model.UserPositionResponseData
 
-class FireStoreVMDelegate: BaseVMDelegate() {
+class MapsVMDelegate: BaseVMDelegate() {
 
     private val _onUsersLocationResponse = MutableLiveData<List<UserPositionResponseData>>()
     val onUsersLocationResponse: LiveData<List<UserPositionResponseData>> get() = _onUsersLocationResponse

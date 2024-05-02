@@ -2,13 +2,13 @@ package com.edominguez.moviedb.features.home.maps.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.edominguez.moviedb.features.home.maps.usecase.FireStoreUseCase
+import com.edominguez.moviedb.features.home.maps.usecase.MapsUseCase
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.coroutines.launch
 
-class FireStoreViewModel(
-    private val fireStoreUseCase: FireStoreUseCase,
-    val fireStoreVMDelegate: FireStoreVMDelegate
+class MapsViewModel(
+    private val fireStoreUseCase: MapsUseCase,
+    val fireStoreVMDelegate: MapsVMDelegate
 ) : ViewModel() {
 
     /** Maps Services **/

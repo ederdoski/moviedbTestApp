@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.edominguez.moviedb.R
 import com.edominguez.moviedb.core.base.BaseFragment
 import com.edominguez.moviedb.core.base.IOnItemClickViewHolder
-import com.edominguez.moviedb.core.common.utils.Functions
 import com.edominguez.moviedb.core.common.utils.GRID_QUANTITY
 import com.edominguez.moviedb.core.common.utils.MOVIE_DB_BIG_IMG_API
 import com.edominguez.moviedb.core.extensions.observe
@@ -14,7 +13,6 @@ import com.edominguez.moviedb.core.extensions.setImageSrcFromUrl
 import com.edominguez.moviedb.core.extensions.toVisible
 import com.edominguez.moviedb.core.protocol.ProtocolAction
 import com.edominguez.moviedb.databinding.HomeViewFragmentBinding
-import com.edominguez.moviedb.features.home.maps.viewmodel.FireStoreViewModel
 import com.edominguez.moviedb.features.home.movies.datasource.model.MovieData
 import com.edominguez.moviedb.features.home.movies.datasource.model.MoviesResponseData
 import com.edominguez.moviedb.features.home.movies.view.HomeActivity.Companion.MOVIE_FILTER_POPULAR
@@ -22,7 +20,6 @@ import com.edominguez.moviedb.features.home.movies.view.HomeActivity.Companion.M
 import com.edominguez.moviedb.features.home.movies.view.HomeActivity.Companion.MOVIE_FILTER_TOP_RATED
 import com.edominguez.moviedb.features.home.movies.view.cell.MoviesAdapter
 import com.edominguez.moviedb.features.home.movies.viewmodel.HomeViewModel
-import com.google.android.gms.maps.model.LatLng
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import kotlin.random.Random
 
