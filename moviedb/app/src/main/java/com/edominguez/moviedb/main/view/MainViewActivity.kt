@@ -9,10 +9,13 @@ import com.edominguez.moviedb.core.common.utils.TWO_SECONDS
 import com.edominguez.moviedb.core.protocol.ProtocolAction
 import com.edominguez.moviedb.databinding.MainViewActivityBinding
 import com.edominguez.moviedb.features.home.movies.view.HomeActivity
+import com.edominguez.moviedb.features.home.movies.viewmodel.HomeViewModel
 import com.edominguez.moviedb.main.viewmodel.MainViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainViewActivity : BaseActivity<MainViewActivityBinding>() {
+
+    private val homeViewModel: HomeViewModel by viewModel()
 
     fun listenToObserver() {}
 
@@ -24,6 +27,7 @@ class MainViewActivity : BaseActivity<MainViewActivityBinding>() {
         delayScreen()
         listenToObserver()
         animationListener()
+        homeViewModel.setSession()
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
     }
 

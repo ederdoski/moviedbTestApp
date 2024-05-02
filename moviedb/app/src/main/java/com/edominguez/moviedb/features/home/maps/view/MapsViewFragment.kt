@@ -1,6 +1,7 @@
 package com.edominguez.moviedb.features.home.maps.view
 
 import android.location.Location
+import android.widget.Toast
 import androidx.fragment.app.FragmentManager
 import com.edominguez.moviedb.R
 import com.edominguez.moviedb.core.base.BaseFragment
@@ -92,14 +93,18 @@ class MapsViewFragment : BaseFragment<MapsViewFragmentBinding>(), OnMapReadyCall
 
     private fun startGetLocationFlow() {
         if(mapsDelegate.checkGpsEnabled(requireActivity())) {
-            if(mapsDelegate.checkLocationPermissionEnabled(requireContext())) {
-                mapsDelegate.startFlowWhenLocationPermissionsEnabled(
-                    activity = requireActivity(),
-                    mapsListener = this
-                )
-            }else{
-                mapsDelegate.startFlowWhenLocationPermissionsDisabled(requireActivity())
-            }
+            permissionsDelegate.requestLocationPermissions(this, object : PermissionHelperEvents {
+                override fun onSuccessPermissionsGranted() {
+                    mapsDelegate.startFlowWhenLocationPermissionsEnabled(
+                        activity = requireActivity(),
+                        mapsListener = this@MapsViewFragment
+                    )
+                }
+
+                override fun onDeniedPermissions() {
+                    showErrorMessage(getString(R.string.txt_error), getString(R.string.txt_location_permissions_denied))
+                }
+            })
         }else{
            showErrorMessage(getString(R.string.txt_error), getString(R.string.txt_error_gps_description))
         }

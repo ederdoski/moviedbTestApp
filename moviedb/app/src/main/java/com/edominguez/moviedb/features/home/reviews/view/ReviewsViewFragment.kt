@@ -30,6 +30,7 @@ class ReviewsViewFragment : BaseFragment<ReviewsViewFragmentBinding>() {
     override fun screenName() = "ReviewsViewFragment"
 
     override fun listenToObserver() {
+        observe(uploadReviewsViewModel.uploadReviewsVMDelegate.showUnknownError, this::onError)
         observe(uploadReviewsViewModel.uploadReviewsVMDelegate.onReviewUploadedResponse, this::onReviewUploadedResponse)
     }
 

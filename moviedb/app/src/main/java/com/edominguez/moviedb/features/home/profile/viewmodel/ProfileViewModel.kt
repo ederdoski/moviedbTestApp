@@ -13,6 +13,7 @@ class ProfileViewModel (
     /** Profile Services **/
     fun getUserReviews() {
         viewModelScope.launch(profileVMDelegate.exceptionHandler()) {
+            profileVMDelegate.loadingPostValue(true)
             try {
                 val reviews = profileUseCase.getUserReviews()
                 profileVMDelegate.onListReviewsResponsePostValue(reviews)

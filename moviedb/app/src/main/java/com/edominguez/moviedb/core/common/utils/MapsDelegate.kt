@@ -96,7 +96,6 @@ class MapsDelegate {
         fusedLocationClient.lastLocation
             .addOnSuccessListener {
                 if(it != null) {
-                    Log.e("Lat location", it.latitude.toString() + "--"+ it.longitude)
                     callback(it)
                 }else {
                     recoverLocation(fusedLocationClient, callback)

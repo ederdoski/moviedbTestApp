@@ -11,7 +11,6 @@ import retrofit2.Response
 class HomeUseCase (private val homeRepository: HomeRepository) {
 
     private lateinit var movieRequestData: MoviesRequestData
-    private lateinit var userPositionRequestData: UserPositionRequestData
 
     fun bindMovie(page: Int, filter:String) {
         movieRequestData =
@@ -21,20 +20,8 @@ class HomeUseCase (private val homeRepository: HomeRepository) {
             )
     }
 
-    fun bindUserPosition(deviceID: String, latLng: LatLng) {
-        userPositionRequestData =
-            UserPositionRequestData(
-                latLng,
-                deviceID,
-                LocalDate.now()
-            )
-    }
-
     suspend fun getMovies(): Response<MoviesResponseData> =
         homeRepository.getMovies(movieRequestData)
-
-    suspend fun getMorePopularUser(): Response<MoviesResponseData> =
-        homeRepository.getMorePopularUser()
 
     fun setSession(token: String) = homeRepository.setSession(token)
 

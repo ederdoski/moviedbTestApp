@@ -1,5 +1,6 @@
 package com.edominguez.moviedb.features.home.movies.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.edominguez.moviedb.BuildConfig

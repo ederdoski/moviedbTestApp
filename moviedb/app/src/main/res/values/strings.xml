@@ -55,6 +55,13 @@
     <string name="txt_error_gps_description">El GPS del dispositivo se encuentra apagado</string>
     <string name="txt_error_user_positions">No podemos accedder a la lista de usuarios</string>
     <string name="ok_btn">OK</string>
+    <string name="txt_location_permissions_denied">Permisos de ubicacion no fueron activados</string>
     <string name="txt_no_granted_notification_permissions">Permisos para enviar notificaciones no fueron aceptados</string>
 
+
+    <!-- Errors -->
+
+    <string name="txt_btn_try_again">Intentar de nuevo</string>
+    <string name="txt_title_network_error">ups…\n no hay conexion a internet</string>
+    <string name="txt_description_network_error">Asegurate de que el wifi o los datos moviles esten encendidos</string>
 </resources>

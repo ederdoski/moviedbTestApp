@@ -61,4 +61,19 @@ class PermissionsDelegate(val context: Context) : KoinComponent {
         }
     }
 
+    fun requestLocationPermissions(fragment: Fragment, event: PermissionHelperEvents) {
+        val requestPermission = fragment.permissionsBuilder(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION).build()
+        requestPermission.addListener{result ->
+            var allPermissionGrandted = true
+            result.map {
+                allPermissionGrandted = it.isGranted()
+            }
+            if(allPermissionGrandted)
+                event.onSuccessPermissionsGranted()
+            else
+                event.onDeniedPermissions()
+        }
+        requestPermission.send()
+    }
+
 }

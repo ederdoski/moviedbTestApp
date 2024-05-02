@@ -11,8 +11,6 @@ class HomeRepository (
     private val preferences: Preferences
 ) {
     suspend fun getMovies(movieRequestData: MoviesRequestData): Response<MoviesResponseData> = homeService.getMovies(movieRequestData.filter, movieRequestData.page)
-    suspend fun getMorePopularUser(): Response<MoviesResponseData> = homeService.getMorePopularUser()
-
     fun setSession(token: String) {
         preferences.jwt = token
     }

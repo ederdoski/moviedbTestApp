@@ -62,9 +62,10 @@ abstract class BaseActivity <T : ViewBinding> : AppCompatActivity(), Communicati
         }
     }
 
-    fun networkError(lyError: View, btnTryAgain: Button) {
-        lyError.toVisible()
-        btnTryAgain.setOnClickListener {
+    fun networkError(lyError: View, enabled: Boolean) {
+        if(enabled) {
+            lyError.toVisible()
+        }else{
             lyError.toGone()
         }
     }

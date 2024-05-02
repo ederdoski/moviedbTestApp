@@ -5,6 +5,8 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.*
 import android.graphics.Insets
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import android.net.Uri
 import android.os.Build
 import android.provider.Settings
@@ -29,54 +31,9 @@ class Functions {
 
     companion object {
 
-        fun openURL(context: Context, url: String) {
-            val intent = Intent(Intent.ACTION_VIEW)
-            intent.data = Uri.parse(url)
-            context.startActivity(intent)
-        }
-
-        fun openEmailApp(context: Context) {
-            val intent = Intent(Intent.ACTION_MAIN)
-            intent.addCategory(Intent.CATEGORY_APP_EMAIL)
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            context.startActivity(intent)
-        }
-
-        fun openAppInPlayStore(context: Context, appPackageName: String) {
-            try {
-                context.startActivity(
-                    Intent(
-                        Intent.ACTION_VIEW,
-                        Uri.parse("market://details?id=$appPackageName")
-                    )
-                )
-            } catch (error: ActivityNotFoundException) {
-                context.startActivity(
-                    Intent(
-                        Intent.ACTION_VIEW,
-                        Uri.parse("https://play.google.com/store/apps/details?id=$appPackageName")
-                    )
-                )
-            }
-        }
-
         @SuppressLint("HardwareIds")
         fun getDeviceID(context: Context): String {
             return Settings.Secure.getString(context.contentResolver, Settings.Secure.ANDROID_ID)
-        }
-
-        fun copyText(activity: Activity, text: String) {
-            val clipboardManager =
-                activity.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-            val clipData = ClipData.newPlainText("text", text)
-            clipboardManager.setPrimaryClip(clipData)
-        }
-
-        fun pasteText(activity: Activity): String {
-            val clipboardManager =
-                activity.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-            val text: CharSequence? = clipboardManager.primaryClip?.getItemAt(0)?.text
-            return text?.toString() ?: EMPTY_STRING
         }
 
         fun setHtmlText(textView: TextView, data: String?) {
@@ -85,43 +42,27 @@ class Functions {
             }
         }
 
-        fun isValidFilePath(filePath: String): Boolean {
-            val file = File(filePath)
-            return file.exists()
+        fun isInternetAvailable(context: Context): Boolean {
+            val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                val network = connectivityManager.activeNetwork ?: return false
+                val activeNetwork = connectivityManager.getNetworkCapabilities(network) ?: return false
+                return when {
+                    activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
+                    activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
+                    activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
+                    else -> false
+                }
+            } else {
+                val networkInfo = connectivityManager.activeNetworkInfo ?: return false
+                return networkInfo.isConnected
+            }
         }
 
         fun setStatusBarColor(activity: Activity, color: Int) {
             val window: Window = activity.window
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
             window.statusBarColor = ContextCompat.getColor(activity, color)
-        }
-
-        fun openFile(file: File, typeFile: String, context: Context) {
-            val url: Uri = FileProvider.getUriForFile(
-                context,
-                context.packageName + ".fileProvider",
-                file
-            )
-            val intent = Intent(Intent.ACTION_VIEW)
-            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-            intent.setDataAndType(url, typeFile)
-            context.startActivity(
-                Intent.createChooser(
-                    intent,
-                    context.getString(R.string.txt_open)
-                )
-            )
-        }
-
-        fun sharePlainText(subject: String, data: String, context: Context){
-            val intent = Intent(Intent.ACTION_SEND)
-            intent.type = "text/plain"
-            intent.putExtra(
-                Intent.EXTRA_SUBJECT,
-                subject
-            )
-            intent.putExtra(Intent.EXTRA_TEXT, data)
-            context.startActivity(Intent.createChooser(intent, data))
         }
 
         fun getDeviceBranchAndModel(): String {
@@ -137,12 +78,6 @@ class Functions {
             }catch (e:Exception) {
                 date
             }
-        }
-
-        //---- SCREEN
-
-        fun animatedView(view: ConstraintLayout, animation: Animation){
-            view.startAnimation(animation)
         }
 
     }

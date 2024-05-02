@@ -33,15 +33,19 @@ class HomeActivity: BaseActivity<HomeViewActivityBinding>() {
     private fun setOnClickListeners() {
         binding.menu.lnItemHome.setOnClickListener {
             goToHome()
+            checkInternetConnection()
         }
         binding.menu.lnItemMaps.setOnClickListener {
             goToMaps()
+            checkInternetConnection()
         }
         binding.menu.lnItemProfile.setOnClickListener {
             goToProfile()
+            checkInternetConnection()
         }
         binding.menu.lnItemUpload.setOnClickListener {
             goToUploadReview()
+            checkInternetConnection()
         }
     }
 
@@ -50,6 +54,7 @@ class HomeActivity: BaseActivity<HomeViewActivityBinding>() {
     override fun onFragmentEvent(action: ProtocolAction) {
         when (action) {
             is ProtocolAction.OnSelectedMenuItem -> setSelectedMenuItem(action.option)
+            is ProtocolAction.OnLoading -> loading(binding.loadingView.root, action.loading)
             else -> {}
         }
     }
@@ -122,6 +127,12 @@ class HomeActivity: BaseActivity<HomeViewActivityBinding>() {
 
     //---- UI Methods
 
-
+    private fun checkInternetConnection() {
+        if(!Functions.isInternetAvailable(this)) {
+            networkError(binding.networkError.root, true)
+        }else{
+            networkError(binding.networkError.root, false)
+        }
+    }
 
 }
