@@ -11,7 +11,7 @@ local.properties la siguiente linea :
 
 MAPS_API_KEY=*INSERTE_KEY_AQUI*
 
-si tienen problemas corriendo el app, conseguiran un compilado en la siguiente ruta  [app](https://github.com/ederdoski/moviedbTestApp/app) - **app-debug.apk**
+si tienen problemas corriendo el app, conseguiran un compilado en la siguiente ruta  [moviedbTestApp]([https://github.com/ederdoski/moviedbTestApp/app](https://github.com/ederdoski/moviedbTestApp/tree/main/app))
 
 Observaciones
 
