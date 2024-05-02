@@ -15,6 +15,7 @@ si tienen problemas corriendo el app, conseguiran un compilado en la siguiente r
 
 Observaciones
 
+Se utilizo una estructura basica de git flow para llevar a cabo el proyecto podran encontrar los detalles aqui
 
 El proyecto tiene dos estructuras, una llamada core que se encarga de manejar la arquitectura y los componentes globales del app y otra llamada features donde conseguiras las funcionalidades requeridas, dividi el proyecto de esta manera 
 para que puedan ver el potencial de crecimiento que tiene la arquitectura.
