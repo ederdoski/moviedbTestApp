@@ -6,6 +6,7 @@ import com.edominguez.moviedb.features.home.profile.datasource.model.ReviewsResp
 import com.edominguez.moviedb.features.home.profile.datasource.service.ProfileService
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.coroutines.tasks.await
+import kotlin.random.Random
 
 class ProfileRepository(private val profileService: ProfileService) {
 
@@ -15,10 +16,11 @@ class ProfileRepository(private val profileService: ProfileService) {
 
         return result.documents.mapNotNull { document ->
             try {
+                val randomID = Random.nextInt(100)
                 val path = document.getString(FireStoreFields.PATH) ?: return@mapNotNull null
                 val rating = document.getDouble(FireStoreFields.RATING) ?: return@mapNotNull null
                 val comment = document.getString(FireStoreFields.COMMENT) ?: return@mapNotNull null
-                ReviewsResponseData(path, rating.toFloat(), comment)
+                ReviewsResponseData(randomID, path, rating.toFloat(), comment)
             } catch (e: Exception) {
                 null
             }
