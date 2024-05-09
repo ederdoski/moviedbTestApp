@@ -21,12 +21,6 @@ class MoviesAdapter (
         )
     }
 
-    override fun onBindViewHolder(holder: BaseViewHolder<MovieData>, position: Int) {
-        holder.bindingDataInHolder(dataList[position])
-    }
-
-    override fun getItemCount(): Int = dataList.size
-
     fun addData(data: List<MovieData>) {
         dataList.addAll(data)
         this.notifyDataSetChanged()

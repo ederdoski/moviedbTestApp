@@ -9,6 +9,9 @@ import com.edominguez.moviedb.core.base.BaseFragment
 import com.edominguez.moviedb.core.base.IOnItemClickViewHolder
 import com.edominguez.moviedb.core.common.utils.GRID_QUANTITY
 import com.edominguez.moviedb.core.common.utils.MOVIE_DB_BIG_IMG_API
+import com.edominguez.moviedb.core.common.utils.MapsDelegate
+import com.edominguez.moviedb.core.common.utils.QUANTITY_MINUTES_TO_REFRESH_MOVIES
+import com.edominguez.moviedb.core.common.utils.QUANTITY_MINUTES_TO_REFRESH_POSITION
 import com.edominguez.moviedb.core.extensions.observe
 import com.edominguez.moviedb.core.extensions.setImageSrcFromUrl
 import com.edominguez.moviedb.core.extensions.toVisible
@@ -21,7 +24,10 @@ import com.edominguez.moviedb.features.home.movies.view.HomeActivity.Companion.M
 import com.edominguez.moviedb.features.home.movies.view.HomeActivity.Companion.MOVIE_FILTER_TOP_RATED
 import com.edominguez.moviedb.features.home.movies.view.cell.MoviesAdapter
 import com.edominguez.moviedb.features.home.movies.viewmodel.HomeViewModel
+import com.google.android.gms.maps.model.LatLng
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.util.concurrent.Executors
+import java.util.concurrent.TimeUnit
 import kotlin.random.Random
 
 class HomeViewFragment : BaseFragment<HomeViewFragmentBinding>() {
@@ -43,6 +49,7 @@ class HomeViewFragment : BaseFragment<HomeViewFragmentBinding>() {
         bindUI()
         initAdapter()
         setOnClickListeners()
+        updateCatalogOfMovies()
         homeViewModel.getMovies(MOVIE_FILTER_POPULAR)
     }
 
@@ -86,7 +93,7 @@ class HomeViewFragment : BaseFragment<HomeViewFragmentBinding>() {
 
     private fun setListOfMovies(aMovies: ArrayList<MovieData>) {
         val tmpAdapter = bindingView.movies.rvMovies.adapter as MoviesAdapter
-        tmpAdapter.addData(aMovies)
+        tmpAdapter.listData = aMovies
     }
 
     private fun onListMovieResponse(moviesResponseData: MoviesResponseData) {
@@ -97,6 +104,14 @@ class HomeViewFragment : BaseFragment<HomeViewFragmentBinding>() {
 
     private val moviesClickListener = object : IOnItemClickViewHolder {
         override fun onItemClick(caller: View?, position: Int) {}
+    }
+
+    private fun updateCatalogOfMovies() {
+        val scheduler = Executors.newScheduledThreadPool(1)
+
+        scheduler.scheduleAtFixedRate({
+            homeViewModel.getMovies(MOVIE_FILTER_POPULAR)
+        }, 0, QUANTITY_MINUTES_TO_REFRESH_MOVIES, TimeUnit.SECONDS)
     }
 
     // ----- UI Methods
