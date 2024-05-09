@@ -26,7 +26,6 @@ class MainViewActivity : BaseActivity<MainViewActivityBinding>() {
     override fun init() {
         delayScreen()
         listenToObserver()
-        animationListener()
         homeViewModel.setSession()
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
     }
@@ -47,10 +46,5 @@ class MainViewActivity : BaseActivity<MainViewActivityBinding>() {
     }
 
     //---- UI Methods
-
-    private fun animationListener() {
-        val fadeInAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_in_animation)
-        binding.imgSplash.startAnimation(fadeInAnimation)
-    }
 
 }

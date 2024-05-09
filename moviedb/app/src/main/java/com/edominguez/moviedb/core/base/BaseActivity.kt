@@ -12,6 +12,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.NavController
 import androidx.viewbinding.ViewBinding
 import com.edominguez.moviedb.core.protocol.CommunicationCallback
@@ -25,6 +26,7 @@ abstract class BaseActivity <T : ViewBinding> : AppCompatActivity(), Communicati
     lateinit var binding: T
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        val splashScreen = installSplashScreen()
         super.onCreate(savedInstanceState)
         val type = javaClass.genericSuperclass as ParameterizedType
         val clazz = type.actualTypeArguments[0] as Class<*>

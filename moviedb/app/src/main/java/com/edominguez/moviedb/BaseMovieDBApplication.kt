@@ -1,6 +1,7 @@
 package com.edominguez.moviedb
 
 import android.app.Application
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.edominguez.moviedb.core.common.components.animationModule
 import com.edominguez.moviedb.core.common.utils.module.utilsModule
 import com.edominguez.moviedb.core.network.networkModule

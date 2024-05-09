@@ -105,6 +105,9 @@ dependencies {
     //---- Material Desing
     implementation ("com.google.android.material:material:1.11.0")
 
+    //---- Splash API 31
+    implementation("androidx.core:core-splashscreen:1.0.1")
+
     //    <-- ...............  Core  ................. -->
 
     //---- Navigation

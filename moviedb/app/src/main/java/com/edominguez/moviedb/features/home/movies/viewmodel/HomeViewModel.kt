@@ -44,6 +44,7 @@ class HomeViewModel (
     }
 
     fun setSession() {
-        homeUseCase.setSession(TMDB_TOKEN)
+        //homeUseCase.setSession(TMDB_TOKEN)
+        homeUseCase.setSession("eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiOWQ4ZWY3YmU2ZGJlZjFhYTE5YjNjMjZiYmJkYWJhZSIsInN1YiI6IjY2MzEwY2NiNDgzMzNhMDEyMTkxYjNjYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.eIreqtQobAXRhFtoJq624imOEbWNf4xNH2LYnfH0wpg")
     }
 }
